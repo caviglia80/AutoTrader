@@ -19,7 +19,7 @@ Module LocalMethods
 
 				'MsgBox(coin.symbol & "  SUBIO O BAJO UN % :  " & (result).ToString & "   " & precentageAllowedBUY.ToString)
 
-				WriteLog(String.Concat(vbTab, "| ", coin.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "%UMBRAL: ", precentageAllowedBUY.ToString, vbTab, " Old Price:", vbTab, oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "New Price:", vbTab, newPrice.ToString).Replace(",", "."))
+				WriteLog(String.Concat(vbTab, "| ", coin.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "Umbral: ", precentageAllowedBUY.ToString, vbTab, " OP:", vbTab, oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "NP:", vbTab, newPrice.ToString).Replace(",", "."))
 
 				'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MENOR QUE EL CONFIGURADO (precentageAllowedBUY), SE COMPRA (INVERSA EN VENTA)
 				If result <= precentageAllowedBUY Then
@@ -39,36 +39,39 @@ Module LocalMethods
 
 	Public Function WeHaveBuysV2() As List(Of SIMBOLO)
 		Try
+			Dim asdsfdaf As New List(Of String)
+
 			Dim readyToBuy As New List(Of SIMBOLO)
 
 			For Each coin In WEB_GetPriceList24h(TCoins_getListOfCoins())
 
-				'"highPrice" "20.79000000",
-				'"lowPrice" "20.16000000",
-				'"lastPrice" "20.37000000",
-
+				Dim oldPrice As Double = TCoins_getLastPriceOperations(coin.Symbol)  'OBTENGO COIN LOCAL, ultimo precio registrado, YA SEA ULTIMA COMPRA O ULTIMA VENTA
+				Dim precentageAllowedBUY As Double = TCoins_percOperation(coin.Symbol, "BUY")   'OBTENGO EL PORCENTAGE CONFIGURADO DE LA COIN
 				Dim PrecioMedioEntreMinYMax As Double = coin.lowPrice + ((coin.highPrice - coin.lowPrice) / 2)
-
 				Dim PriceAPiso As Double = Math.Abs(coin.lastPrice - coin.lowPrice) ' Distancia entre el precio actual y LowPrice
 				Dim PriceATecho As Double = Math.Abs(coin.lastPrice - PrecioMedioEntreMinYMax) ' Distancia entre el número actual y el PrecioMedio
 
 				'SI EL PRECIO ACTUAL ES MAS CERCANO AL SUELO QUE DEL TECHO, COMPRO
 				If PriceAPiso * SENSIBILIDAD_COMPRA < PriceATecho Then
-					'MsgBox("compro " & coin.Symbol & "  " & PriceAPiso & "  " & PriceATecho & "  " & PrecioMedioEntreMinYMax)
 
-					Dim oldPrice As Double = TCoins_getLastPriceOperations(coin.Symbol)  'OBTENGO COIN LOCAL, ultimo precio registrado, YA SEA ULTIMA COMPRA O ULTIMA VENTA
 					Dim result As Double = ((coin.lastPrice * 100) / oldPrice) - 100 'REGLA DE 3 SIMPLES PARA SABER EL PORCENTAJE DE CAMBIO
-					Dim precentageAllowedBUY As Double = TCoins_percOperation(coin.Symbol, "BUY")   'OBTENGO EL PORCENTAGE CONFIGURADO DE LA COIN
-
 					'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MENOR QUE EL CONFIGURADO (precentageAllowedBUY), SE COMPRA (INVERSA EN VENTA)
 					If result <= precentageAllowedBUY Then
 						readyToBuy.Add(coin)
-						WriteLog(String.Concat(vbTab, "|* ", coin.Symbol, "  ", vbTab, vbTab, "PriceAPiso: ", PriceAPiso.ToString("0.0000"), vbTab, "PriceATecho: ", PriceATecho.ToString("0.0000"), vbTab, " lastPrice:", vbTab, coin.lastPrice.ToString))
+						'WriteLog(String.Concat(vbTab, "|** ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", PriceAPiso.ToString("0.0000"), vbTab, "Umbral: ", PriceATecho.ToString("0.0000"), vbTab, vbTab, " % BUY: ", precentageAllowedBUY.ToString("0.00"), vbTab, " OP:", vbTab, oldPrice.ToString("0.0000"), vbTab, " NP:", vbTab, coin.lastPrice.ToString("0.0000")))
+						WriteLog(String.Concat(vbTab, "|** ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", result.ToString("0.0000"), vbTab, "Umbral: ", precentageAllowedBUY.ToString("0.00"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
+					Else
+						'WriteLog(String.Concat(vbTab, "|*  ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", PriceAPiso.ToString("0.0000"), vbTab, "Umbral: ", PriceATecho.ToString("0.0000"), vbTab, vbTab, " % BUY: ", precentageAllowedBUY.ToString("0.00"), vbTab, " OP:", vbTab, oldPrice.ToString("0.0000"), vbTab, " NP:", vbTab, coin.lastPrice.ToString("0.0000")))
+						WriteLog(String.Concat(vbTab, "|*  ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", result.ToString("0.0000"), vbTab, "Umbral: ", precentageAllowedBUY.ToString("0.00"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
 					End If
 				Else
-					WriteLog(String.Concat(vbTab, "|  ", coin.Symbol, "  ", vbTab, vbTab, "PriceAPiso: ", PriceAPiso.ToString("0.0000"), vbTab, "PriceATecho: ", PriceATecho.ToString("0.0000"), vbTab, " lastPrice:", vbTab, coin.lastPrice.ToString))
+					WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", (PriceAPiso * SENSIBILIDAD_COMPRA).ToString("0.0000"), vbTab, vbTab, "Umbral: ", PriceATecho.ToString("0.0000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
 				End If
 			Next
+
+
+			'File.AppendAllLines("C:\Users\cavig\OneDrive\Escritorio\asd.txt", asdsfdaf)
+
 
 			Return readyToBuy
 		Catch ex As Exception
@@ -202,7 +205,7 @@ Module LocalMethods
 				Dim result As Double = ((newPrice * 100) / oldPrice) - 100
 
 				'MsgBox(result & "      " & coinBuyed.symbol & "      " & coinBuyed.quantity & "      " & precentageAllowedSELL)
-				WriteLog(String.Concat(vbTab, "| ", coinBuyed.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "%UMBRAL: ", precentageAllowedSELL.ToString, vbTab, "%SL: ", coinBuyed.StopLost.ToString, vbTab, " Old Price: ", oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "New Price: ", newPrice.ToString).Replace(",", "."))
+				WriteLog(String.Concat(vbTab, "| ", coinBuyed.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "Umbral: ", precentageAllowedSELL.ToString, vbTab, "SL: ", coinBuyed.StopLost.ToString, vbTab, " OP: ", oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "NP: ", newPrice.ToString).Replace(",", "."))
 
 				'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MAYOR QUE EL CONFIGURADO (precentageAllowedSELL), SE VENDE (INVERSA EN COMPRA)
 				If result >= precentageAllowedSELL Then

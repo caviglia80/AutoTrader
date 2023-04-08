@@ -9,9 +9,6 @@ Module Web
 
 	Private ReadOnly binanceUrl As String = "https://api.binance.com"
 
-
-
-
 	Public Function _POST(ByVal endPoint As String, ByVal symbol As String, ByVal side As String, ByVal quantity As String) As String
 		'_Post("/api/v3/order/test", "ETCUSDT", "BUY", "1") EXAMPLE
 		Dim responseStr As String = ""
