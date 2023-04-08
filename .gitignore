@@ -10,3 +10,14 @@ autoTrader/.vs/autoTrader/FileContentIndex/08e616cd-874c-46a6-bd55-c9da9ef5c0bb.
 *.vsidx
 
 *.v2
+<<<<<<< HEAD
+=======
+
+*.props
+
+autoTrader/obj/autoTrader.vbproj.nuget.dgspec.json
+
+*.cache
+
+autoTrader/obj/project.assets.json
+>>>>>>> main
