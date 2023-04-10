@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\cavig\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\cavig\\.nuget\\packages"
+      "C:\\Users\\Server\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Server\\.nuget\\packages"
     ]
   }
 }

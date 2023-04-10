@@ -19,7 +19,7 @@ Module LocalMethods
 
 				'MsgBox(coin.symbol & "  SUBIO O BAJO UN % :  " & (result).ToString & "   " & precentageAllowedBUY.ToString)
 
-				WriteLog(String.Concat(vbTab, "| ", coin.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "%UMBRAL: ", precentageAllowedBUY.ToString, vbTab, " Old Price:", vbTab, oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "New Price:", vbTab, newPrice.ToString).Replace(",", "."))
+				WriteLog(String.Concat(vbTab, "| ", coin.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "Umbral: ", precentageAllowedBUY.ToString, vbTab, " OP:", vbTab, oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "NP:", vbTab, newPrice.ToString).Replace(",", "."))
 
 				'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MENOR QUE EL CONFIGURADO (precentageAllowedBUY), SE COMPRA (INVERSA EN VENTA)
 				If result <= precentageAllowedBUY Then
@@ -47,6 +47,7 @@ Module LocalMethods
 
 				Dim oldPrice As Double = TCoins_getLastPriceOperations(coin.Symbol)  'OBTENGO COIN LOCAL, ultimo precio registrado, YA SEA ULTIMA COMPRA O ULTIMA VENTA
 				Dim precentageAllowedBUY As Double = TCoins_percOperation(coin.Symbol, "BUY")   'OBTENGO EL PORCENTAGE CONFIGURADO DE LA COIN
+
 				Dim PrecioPromedio As Double = coin.lowPrice + ((coin.highPrice - coin.lowPrice) / 2)
 				Dim DistanciaAMin As Double = Math.Abs(coin.lastPrice - coin.lowPrice) ' Distancia entre CurrentPrice y LowPrice
 				Dim DistanciaAPromedio As Double = Math.Abs(coin.lastPrice - PrecioPromedio) ' Distancia entre CurrentPrice y el PrecioPromedio
@@ -59,10 +60,6 @@ Module LocalMethods
 
 				'SI EL PRECIO ACTUAL ES MAS CERCANO AL SUELO QUE DEL TECHO, COMPRO
 				If DistanciaAMin * SENSIBILIDAD_COMPRA < DistanciaAPromedio Then
-
-
-
-
 
 
 
@@ -215,7 +212,7 @@ Module LocalMethods
 				Dim result As Double = ((newPrice * 100) / oldPrice) - 100
 
 				'MsgBox(result & "      " & coinBuyed.symbol & "      " & coinBuyed.quantity & "      " & precentageAllowedSELL)
-				WriteLog(String.Concat(vbTab, "| ", coinBuyed.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "%UMBRAL: ", precentageAllowedSELL.ToString, vbTab, "%SL: ", coinBuyed.StopLost.ToString, vbTab, " Old Price: ", oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "New Price: ", newPrice.ToString).Replace(",", "."))
+				WriteLog(String.Concat(vbTab, "| ", coinBuyed.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "Umbral: ", precentageAllowedSELL.ToString, vbTab, "SL: ", coinBuyed.StopLost.ToString, vbTab, " OP: ", oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "NP: ", newPrice.ToString).Replace(",", "."))
 
 				'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MAYOR QUE EL CONFIGURADO (precentageAllowedSELL), SE VENDE (INVERSA EN COMPRA)
 				If result >= precentageAllowedSELL Then
