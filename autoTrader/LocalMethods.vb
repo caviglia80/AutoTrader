@@ -71,7 +71,7 @@ Module LocalMethods
 					End If
 				Else
 					'WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "Umbral: ", (coin.lowPrice + UmbralPermitido).ToString("0.000"), vbTab, vbTab, "Current: ", coin.lastPrice.ToString("0.000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
-					WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "Sensibilidad: ", SENSIBILIDAD_COMPRA, "%  Falta: ", Math.Max(coin.lastPrice - (coin.lowPrice + UmbralPermitido), 0).ToString("0.00000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
+					WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "Sensibilidad: ", SENSIBILIDAD_COMPRA, "%  Falta: ", Math.Max(coin.lastPrice - (coin.lowPrice + UmbralPermitido), 0).ToString("0.00000000"), vbTab, " OP: ", oldPrice.ToString("0.00000000"), vbTab, " NP: ", coin.lastPrice.ToString("0.00000000")))
 					'WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "TFalta: ", (coin.lastPrice - (coin.lowPrice + UmbralPermitido)).ToString("0.0000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
 				End If
 			Next
