@@ -24,15 +24,38 @@ Public Class Form1
 
 
 
-		'Dim SellList As List(Of SIMBOLO) = WeHaveSells()
-		'If SellList.Count > 0 Then
-		'	WriteLog(String.Concat(vbTab, "|", vbTab, "A VENDER: ", SellList.Count.ToString))
-		'	If Not WebPost_TrySELL(SellList) Then
-		'		WriteLog("Fatal error en venta.")
+		'If Not WebGet_Maintenance() Then
+		'	If Not WEBGet_AccountAPITrading_isBlocked() Then
+
+		'		Dim Buylist As List(Of SIMBOLO) = WeHaveBuysV2()
+		'		If Buylist.Count > 0 Then
+		'			If Not WebPost_TryBUY(Buylist) Then
+		'				WriteLog("Fatal error en Compra.")
+		'			End If
+		'		End If
+
+		'		Dim SellList As List(Of SIMBOLO) = WeHaveSells()
+		'		If SellList.Count > 0 Then
+		'			'WriteLine("SELL:")
+		'			WriteLog(String.Concat(vbTab, "|", vbTab, "A VENDER: ", SellList.Count.ToString))
+		'			If Not WebPost_TrySELL(SellList) Then
+		'				WriteLog("Fatal error en venta.")
+		'			End If
+		'		End If
+
+		'	Else
+		'		WriteLog("API TRADING BLOQUEADA (ESPERANDO 15 MIN)")
+		'		System.Threading.Thread.Sleep(900000)
 		'	End If
 		'Else
-		'	WriteLog(String.Concat(vbTab, "|* NADA PARA VENDER."))
+		'	WriteLog("SERVIDOR EN MANTENIMIENTO (ESPERANDO 5 MIN)")
+		'	System.Threading.Thread.Sleep(300000)
 		'End If
+
+
+
+
+
 
 	End Sub
 
@@ -54,6 +77,8 @@ Public Class Form1
 						End If
 					End If
 
+					WriteLog(String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%"))
+
 					Dim SellList As List(Of SIMBOLO) = WeHaveSells()
 					If SellList.Count > 0 Then
 						'WriteLine("SELL:")
@@ -62,7 +87,6 @@ Public Class Form1
 							WriteLog("Fatal error en venta.")
 						End If
 					End If
-
 				Else
 					WriteLog("API TRADING BLOQUEADA (ESPERANDO 15 MIN)")
 					System.Threading.Thread.Sleep(900000)
@@ -173,7 +197,7 @@ Public Class Form1
 			'PRIMERO ACTUALIZO EL CAMBIO DE BTC LOS % ULTIMAS 24HS (para compra)
 			CAMBIO24HS_BTC = WebGet_Cambio24hsBTC()
 
-			lEstado.Text = String.Concat("CAMBIO BTC ", CAMBIO24HS_BTC.ToString, "%")
+			lEstado.Text = String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%")
 
 			If CAMBIO24HS_BTC <= 0.5 Then
 				lEstado.BackColor = Color.Red
@@ -201,7 +225,6 @@ Public Class Form1
 
 	Private Sub btnActualizarBTC24_Click(sender As Object, e As EventArgs) Handles btnActualizarBTC24.Click
 		Try
-			CAMBIO24HS_BTC = WebGet_Cambio24hsBTC()
 			LabelBTC()
 		Catch ex As Exception
 			MsgBox(ex.Message)

@@ -15,7 +15,7 @@ Module Configs
 	Public Const USDT_A_GASTAR_PER_COIN As Double = 100.0
 	Public ReadOnly tmpLog As String = "C:\GitHub\AutoTrader\autoTraderLog.dat" 'String.Concat(Path.GetTempPath(), "autoTraderLog")
 	Public CAMBIO24HS_BTC As Double = 0
-	Public SENSIBILIDAD_COMPRA As Integer = 4 'default 2, aumentar la presicion puede disminuir las compras
+	Public SENSIBILIDAD_COMPRA As Integer = 60 'default 60, disminuir la presicion puede disminuir las compras
 
 #End Region
 
