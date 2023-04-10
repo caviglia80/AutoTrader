@@ -36,18 +36,6 @@ Public Class Form1
 
 	End Sub
 
-
-
-
-
-
-
-
-
-	'Public GlobalToBuy As New List(Of SIMBOLO)
-
-
-
 	Private Sub tBatch_Tick(sender As Object, e As EventArgs) Handles tBatch.Tick
 		tBatch.Stop()
 		Try
@@ -90,87 +78,87 @@ Public Class Form1
 		tBatch.Start()
 	End Sub
 
-	Private Sub OldVersion()
-		Try
+	'Private Sub OldVersion()
+	'	Try
 
-			'SI NO ESTA EN MANT...
-			If Not WebGet_Maintenance() Then
-				If Not WEBGet_AccountAPITrading_isBlocked() Then
+	'		'SI NO ESTA EN MANT...
+	'		If Not WebGet_Maintenance() Then
+	'			If Not WEBGet_AccountAPITrading_isBlocked() Then
 
-					If True Then 'CAMBIO24HS_BTC > 1.5
-						Dim Buylist As List(Of SIMBOLO) = WeHaveBuys()
-						'WriteLine("BUY:")
+	'				If True Then 'CAMBIO24HS_BTC > 1.5
+	'					Dim Buylist As List(Of SIMBOLO) = WeHaveBuys()
+	'					'WriteLine("BUY:")
 
-						If False Then
-							WriteLog("Compra Inteligente Activada.")
+	'					If False Then
+	'						WriteLog("Compra Inteligente Activada.")
 
-							If Buylist.Count > 0 Then
-								For Each coin In Buylist
-									TBuysTemp_NewLog(coin.Symbol, Now, coin.MarketPrice)
-									WriteLog(String.Concat("Agregado a tBuysTemp: ", coin.Symbol, vbTab, Now, vbTab, "New Price: ", coin.MarketPrice))
-								Next
-							End If
+	'						If Buylist.Count > 0 Then
+	'							For Each coin In Buylist
+	'								TBuysTemp_NewLog(coin.Symbol, Now, coin.MarketPrice)
+	'								WriteLog(String.Concat("Agregado a tBuysTemp: ", coin.Symbol, vbTab, Now, vbTab, "New Price: ", coin.MarketPrice))
+	'							Next
+	'						End If
 
-							Dim NewBuylist As New List(Of SIMBOLO)
+	'						Dim NewBuylist As New List(Of SIMBOLO)
 
-							Dim NewPrices As New List(Of SIMBOLO)
-							NewPrices.AddRange(WEB_GetPriceList(TCoins_getListOfCoins()))
+	'						Dim NewPrices As New List(Of SIMBOLO)
+	'						NewPrices.AddRange(WEB_GetPriceList(TCoins_getListOfCoins()))
 
-							Dim OldPrices As New List(Of SIMBOLO)
-							OldPrices.AddRange(TBuysTemp_GetOldPrices())
+	'						Dim OldPrices As New List(Of SIMBOLO)
+	'						OldPrices.AddRange(TBuysTemp_GetOldPrices())
 
-							For Each coin In OldPrices
-								Dim SimboloActualizado As SIMBOLO = NewPrices.Find(Function(x) x.Symbol.Equals(coin.Symbol))
+	'						For Each coin In OldPrices
+	'							Dim SimboloActualizado As SIMBOLO = NewPrices.Find(Function(x) x.Symbol.Equals(coin.Symbol))
 
-								If SimboloActualizado.MarketPrice > coin.MarketPrice Then
-									WriteLog(String.Concat("NO BAJA MAS, SI agrego a tBuys: ", coin.Symbol, vbTab, "Old Price: ", coin.MarketPrice, vbTab, "New Price: ", SimboloActualizado.MarketPrice))
-									NewBuylist.Add(coin)
-								Else
-									WriteLog(String.Concat("SI BAJA MAS, NO agrego a tBuys: ", coin.Symbol, vbTab, "Old Price: ", coin.MarketPrice, vbTab, "New Price: ", SimboloActualizado.MarketPrice))
-								End If
-							Next
+	'							If SimboloActualizado.MarketPrice > coin.MarketPrice Then
+	'								WriteLog(String.Concat("NO BAJA MAS, SI agrego a tBuys: ", coin.Symbol, vbTab, "Old Price: ", coin.MarketPrice, vbTab, "New Price: ", SimboloActualizado.MarketPrice))
+	'								NewBuylist.Add(coin)
+	'							Else
+	'								WriteLog(String.Concat("SI BAJA MAS, NO agrego a tBuys: ", coin.Symbol, vbTab, "Old Price: ", coin.MarketPrice, vbTab, "New Price: ", SimboloActualizado.MarketPrice))
+	'							End If
+	'						Next
 
-							WriteLog(String.Concat(vbTab, "|", vbTab, "A COMPRAR: ", NewBuylist.Count.ToString, vbTab, vbTab, "EN ESPERA: ", (OldPrices.Count - NewBuylist.Count).ToString))
-							If Not WebPost_TryBUY(NewBuylist) Then
-								WriteLog("Fatal error en Compra Inteligente.")
-							End If
+	'						WriteLog(String.Concat(vbTab, "|", vbTab, "A COMPRAR: ", NewBuylist.Count.ToString, vbTab, vbTab, "EN ESPERA: ", (OldPrices.Count - NewBuylist.Count).ToString))
+	'						If Not WebPost_TryBUY(NewBuylist) Then
+	'							WriteLog("Fatal error en Compra Inteligente.")
+	'						End If
 
-						Else
-							WriteLog("Compra Inteligente Desactivada.")
-							WriteLog(String.Concat(vbTab, "|", vbTab, "A COMPRAR: ", Buylist.Count.ToString))
-							If Buylist.Count > 0 Then
-								If Not WebPost_TryBUY(Buylist) Then
-									WriteLog("Fatal error en Compra.")
-								End If
-							End If
-						End If
+	'					Else
+	'						WriteLog("Compra Inteligente Desactivada.")
+	'						WriteLog(String.Concat(vbTab, "|", vbTab, "A COMPRAR: ", Buylist.Count.ToString))
+	'						If Buylist.Count > 0 Then
+	'							If Not WebPost_TryBUY(Buylist) Then
+	'								WriteLog("Fatal error en Compra.")
+	'							End If
+	'						End If
+	'					End If
 
-					Else
-						WriteLine(String.Concat("* BTC % CAMBIO BAJO, NO SE COMPRARA.. [ ", CAMBIO24HS_BTC.ToString.Replace(",", "."), " ]"))
-					End If
+	'				Else
+	'					WriteLine(String.Concat("* BTC % CAMBIO BAJO, NO SE COMPRARA.. [ ", CAMBIO24HS_BTC.ToString.Replace(",", "."), " ]"))
+	'				End If
 
-					Dim SellList As List(Of SIMBOLO) = WeHaveSells()
-					If SellList.Count > 0 Then
-						'WriteLine("SELL:")
-						WriteLog(String.Concat(vbTab, "|", vbTab, "A VENDER: ", SellList.Count.ToString))
-						If Not WebPost_TrySELL(SellList) Then
-							WriteLog("Fatal error en venta.")
-						End If
-					Else
-						WriteLine("* NADA PARA VENDER.")
-					End If
-				Else
-					WriteLog("API TRADING BLOQUEADA (ESPERANDO 15 MIN)")
-					System.Threading.Thread.Sleep(900000)
-				End If
-			Else
-				WriteLog("SERVIDOR EN MANTENIMIENTO (ESPERANDO 5 MIN)")
-				System.Threading.Thread.Sleep(300000)
-			End If
-		Catch ex As Exception
-			MsgBox(ex.Message)
-		End Try
-	End Sub
+	'				Dim SellList As List(Of SIMBOLO) = WeHaveSells()
+	'				If SellList.Count > 0 Then
+	'					'WriteLine("SELL:")
+	'					WriteLog(String.Concat(vbTab, "|", vbTab, "A VENDER: ", SellList.Count.ToString))
+	'					If Not WebPost_TrySELL(SellList) Then
+	'						WriteLog("Fatal error en venta.")
+	'					End If
+	'				Else
+	'					WriteLine("* NADA PARA VENDER.")
+	'				End If
+	'			Else
+	'				WriteLog("API TRADING BLOQUEADA (ESPERANDO 15 MIN)")
+	'				System.Threading.Thread.Sleep(900000)
+	'			End If
+	'		Else
+	'			WriteLog("SERVIDOR EN MANTENIMIENTO (ESPERANDO 5 MIN)")
+	'			System.Threading.Thread.Sleep(300000)
+	'		End If
+	'	Catch ex As Exception
+	'		MsgBox(ex.Message)
+	'	End Try
+	'End Sub
 
 	Private Sub btnVerLog_Click(sender As Object, e As EventArgs) Handles btnVerLog.Click
 		Try

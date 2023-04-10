@@ -47,31 +47,41 @@ Module LocalMethods
 
 				Dim oldPrice As Double = TCoins_getLastPriceOperations(coin.Symbol)  'OBTENGO COIN LOCAL, ultimo precio registrado, YA SEA ULTIMA COMPRA O ULTIMA VENTA
 				Dim precentageAllowedBUY As Double = TCoins_percOperation(coin.Symbol, "BUY")   'OBTENGO EL PORCENTAGE CONFIGURADO DE LA COIN
-				Dim PrecioMedioEntreMinYMax As Double = coin.lowPrice + ((coin.highPrice - coin.lowPrice) / 2)
-				Dim PriceAPiso As Double = Math.Abs(coin.lastPrice - coin.lowPrice) ' Distancia entre el precio actual y LowPrice
-				Dim PriceATecho As Double = Math.Abs(coin.lastPrice - PrecioMedioEntreMinYMax) ' Distancia entre el número actual y el PrecioMedio
+				Dim PrecioPromedio As Double = coin.lowPrice + ((coin.highPrice - coin.lowPrice) / 2)
+				Dim DistanciaAMin As Double = Math.Abs(coin.lastPrice - coin.lowPrice) ' Distancia entre CurrentPrice y LowPrice
+				Dim DistanciaAPromedio As Double = Math.Abs(coin.lastPrice - PrecioPromedio) ' Distancia entre CurrentPrice y el PrecioPromedio
+
+
+
+
+
+
 
 				'SI EL PRECIO ACTUAL ES MAS CERCANO AL SUELO QUE DEL TECHO, COMPRO
-				If PriceAPiso * SENSIBILIDAD_COMPRA < PriceATecho Then
+				If DistanciaAMin * SENSIBILIDAD_COMPRA < DistanciaAPromedio Then
+
+
+
+
+
+
+
+
 
 					Dim result As Double = ((coin.lastPrice * 100) / oldPrice) - 100 'REGLA DE 3 SIMPLES PARA SABER EL PORCENTAJE DE CAMBIO
 					'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MENOR QUE EL CONFIGURADO (precentageAllowedBUY), SE COMPRA (INVERSA EN VENTA)
 					If result <= precentageAllowedBUY Then
 						readyToBuy.Add(coin)
-						'WriteLog(String.Concat(vbTab, "|** ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", PriceAPiso.ToString("0.0000"), vbTab, "Umbral: ", PriceATecho.ToString("0.0000"), vbTab, vbTab, " % BUY: ", precentageAllowedBUY.ToString("0.00"), vbTab, " Old Price:", vbTab, oldPrice.ToString("0.0000"), vbTab, " New Price:", vbTab, coin.lastPrice.ToString("0.0000")))
+						'WriteLog(String.Concat(vbTab, "|** ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", DistanciaAMin.ToString("0.0000"), vbTab, "Umbral: ", DistanciaAPromedio.ToString("0.0000"), vbTab, vbTab, " % BUY: ", precentageAllowedBUY.ToString("0.00"), vbTab, " Old Price:", vbTab, oldPrice.ToString("0.0000"), vbTab, " New Price:", vbTab, coin.lastPrice.ToString("0.0000")))
 						WriteLog(String.Concat(vbTab, "|** ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", result.ToString("0.0000"), vbTab, "Umbral: ", precentageAllowedBUY.ToString("0.00"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
 					Else
-						'WriteLog(String.Concat(vbTab, "|*  ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", PriceAPiso.ToString("0.0000"), vbTab, "Umbral: ", PriceATecho.ToString("0.0000"), vbTab, vbTab, " % BUY: ", precentageAllowedBUY.ToString("0.00"), vbTab, " Old Price:", vbTab, oldPrice.ToString("0.0000"), vbTab, " New Price:", vbTab, coin.lastPrice.ToString("0.0000")))
+						'WriteLog(String.Concat(vbTab, "|*  ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", DistanciaAMin.ToString("0.0000"), vbTab, "Umbral: ", DistanciaAPromedio.ToString("0.0000"), vbTab, vbTab, " % BUY: ", precentageAllowedBUY.ToString("0.00"), vbTab, " Old Price:", vbTab, oldPrice.ToString("0.0000"), vbTab, " New Price:", vbTab, coin.lastPrice.ToString("0.0000")))
 						WriteLog(String.Concat(vbTab, "|*  ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", result.ToString("0.0000"), vbTab, "Umbral: ", precentageAllowedBUY.ToString("0.00"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
 					End If
 				Else
-					WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", (PriceAPiso * SENSIBILIDAD_COMPRA).ToString("0.0000"), vbTab, vbTab, "Umbral: ", PriceATecho.ToString("0.0000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
+					WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", (DistanciaAMin * SENSIBILIDAD_COMPRA).ToString("0.0000"), vbTab, vbTab, "Umbral: ", DistanciaAPromedio.ToString("0.0000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
 				End If
 			Next
-
-
-			'File.AppendAllLines("C:\Users\cavig\OneDrive\Escritorio\asd.txt", asdsfdaf)
-
 
 			Return readyToBuy
 		Catch ex As Exception
