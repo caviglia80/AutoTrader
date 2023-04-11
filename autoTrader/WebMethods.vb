@@ -152,19 +152,13 @@ Module WebMethods
 				Dim json As New Chilkat.JsonObject()
 				If debugMode Then json.Load(CargamosDatosDePrueba(C.Symbol, "SELL", C.Quantity, C.MarketPrice)) Else json.Load(respPost)
 
-
 				'MsgBox(C.MarketPrice.ToString)
 				'MsgBox(json.StringOf("cummulativeQuoteQty"))
-
 
 				Dim GananciaBruta As Double = CDbl(json.StringOf("cummulativeQuoteQty").Replace(".", ","))
 				Dim Qty As Double = CDbl(json.StringOf("executedQty").Replace(".", ","))
 				'ACTUALIZO TBuys(LA MARCO COMO VENDIDA) 
 				TBuys_NowSelled(C.ID)
-
-
-				'MsgBox(Price & " " & Qty & " " & (Price - C.USDT) & " " & C.MarketPrice)
-
 
 				'ACTUALIZO TSells(INSERTO VENTA) Y TCoins(ACTUALIZO OperationLastPrice, Profit_USDT).
 				TSellsTCoins_NewSell(C.Symbol, Now, GananciaBruta, Qty, (GananciaBruta - C.USDT), C.MarketPrice)

@@ -510,13 +510,13 @@ Module DB
 	End Sub
 
 	'ACTUALIZO Comments en Tbuys
-	Public Function Tbuys_Comments(ID As String, Comment As String) As Boolean
+	Public Function Table_Comments(Table As String, ID As String, Comment As String) As Boolean
 		Try
 			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
 				SQLiteConnection.Open()
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tBuys SET Comments=Comments||""", Comment, """ WHERE ID =""", ID, """;")}
+					.CommandText = String.Concat("UPDATE """, Table, """ SET Comments=Comments||""", Comment, """ WHERE ID =""", ID, """;")}
 					cmd.ExecuteNonQuery()
 				End Using
 			End Using
