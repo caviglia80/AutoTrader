@@ -509,7 +509,24 @@ Module DB
 		End Try
 	End Sub
 
-
+	'ACTUALIZO Comments en Tbuys
+	Public Function Tbuys_Comments(ID As String, Comment As String) As Boolean
+		Try
+			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
+				SQLiteConnection.Open()
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("UPDATE tBuys SET Comments=Comments||""", Comment, """ WHERE ID =""", ID, """;")}
+					cmd.ExecuteNonQuery()
+				End Using
+			End Using
+			Return True
+		Catch ex As Exception
+			WriteLog("ERR: Tbuys_Comments()")
+			MsgBox(ex.Message)
+		End Try
+		Return False
+	End Function
 
 
 
