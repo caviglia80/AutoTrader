@@ -18,39 +18,9 @@ Public Class Form1
 
 	Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-		'WeHaveBuysV2()
-
-		'Table_Comments("837", "HOLAAA a")
 
 
 
-		'If Not WebGet_Maintenance() Then
-		'	If Not WEBGet_AccountAPITrading_isBlocked() Then
-
-		'		Dim Buylist As List(Of SIMBOLO) = WeHaveBuysV2()
-		'		If Buylist.Count > 0 Then
-		'			If Not WebPost_TryBUY(Buylist) Then
-		'				WriteLog("Fatal error en Compra.")
-		'			End If
-		'		End If
-
-		'		Dim SellList As List(Of SIMBOLO) = WeHaveSells()
-		'		If SellList.Count > 0 Then
-		'			'WriteLine("SELL:")
-		'			WriteLog(String.Concat(vbTab, "|", vbTab, "A VENDER: ", SellList.Count.ToString))
-		'			If Not WebPost_TrySELL(SellList) Then
-		'				WriteLog("Fatal error en venta.")
-		'			End If
-		'		End If
-
-		'	Else
-		'		WriteLog("API TRADING BLOQUEADA (ESPERANDO 15 MIN)")
-		'		System.Threading.Thread.Sleep(900000)
-		'	End If
-		'Else
-		'	WriteLog("SERVIDOR EN MANTENIMIENTO (ESPERANDO 5 MIN)")
-		'	System.Threading.Thread.Sleep(300000)
-		'End If
 
 
 
