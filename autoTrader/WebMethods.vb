@@ -91,35 +91,40 @@ Module WebMethods
 	'REALIZO LAS COMPRAS
 	Public Function WebPost_TryBUY(coinList As List(Of SIMBOLO)) As Boolean
 		Try
-			For Each c In coinList
+			For Each coin In coinList
 
-				If Not TCoins_isEnabled(c.Symbol, "BUY") Then
-					WriteLog(String.Concat("ADVERTENCIA: DESHABILITADA para la compra ", c.Symbol))
+				If Not TCoins_isEnabled(coin.Symbol, "BUY") Then
+					WriteLog(String.Concat("ADVERTENCIA: DESHABILITADA para la compra ", coin.Symbol))
 					Continue For              'SI NO ESTA HABILITADA PARA COMPRAR, LA SALTEA
 				End If
 
-				If Not TCoinsTBuys_isAvailableToBuy(c.Symbol) Then
-					WriteLog(String.Concat("ADVERTENCIA: MAXIMO DE COMPRAS ALCANZADO ", c.Symbol))
+				If Not TCoinsTBuys_isAvailableToBuy(coin.Symbol) Then
+					WriteLog(String.Concat("ADVERTENCIA: MAXIMO DE COMPRAS ALCANZADO ", coin.Symbol))
 					Continue For         'SI LLEGO AL MAXIMO DE COMPRAS SIMULTANEAS, LA SALTEO
 				End If
 
-				Dim QuantityToBuy As String = calculateQuantityToBuy(c.Symbol, c.lastPrice, USDT_A_GASTAR_PER_COIN)
+				Dim QuantityToBuy As String = calculateQuantityToBuy(coin.Symbol, coin.lastPrice, USDT_A_GASTAR_PER_COIN)
 				Dim respPost As String = ""
-				If Not debugMode Then respPost = _POST("/api/v3/order", c.Symbol, "BUY", QuantityToBuy)
+				If Not debugMode Then respPost = _POST("/api/v3/order", coin.Symbol, "BUY", QuantityToBuy)
 
 				If IsError(respPost) Then
 					WriteLog("Error en compra.")
 					Continue For
 				End If
 
-				WriteLog(String.Concat(vbTab, "|  COMPRA REALIZADA(", c.Symbol, ")", vbTab, "BTC: ", CAMBIO24HS_BTC.ToString().Replace(",", "."), "%"))
+				WriteLog(String.Concat(vbTab, "|  COMPRA REALIZADA(", coin.Symbol, ")", vbTab, "BTC: ", CAMBIO24HS_BTC.ToString().Replace(",", "."), "%"))
 
 				Dim json As New Chilkat.JsonObject()
-				If debugMode Then json.Load(CargamosDatosDePrueba(c.Symbol, "BUY", QuantityToBuy, 0)) Else json.Load(respPost)
+				If debugMode Then json.Load(CargamosDatosDePrueba(coin.Symbol, "BUY", QuantityToBuy, 0)) Else json.Load(respPost)
 				Dim USDTtoBUY As String = json.StringOf("cummulativeQuoteQty")
 				Dim Qty As String = json.StringOf("executedQty")
-				TBuysTCoins_NewBuy(c.Symbol, Now, USDTtoBUY, Qty, c.lastPrice.ToString())
-				If c.ID.Length > 0 Then TBuysTemp_BorrarID(c.ID)
+
+				Dim oldPrice As Double = TCoins_getLastPriceOperations(coin.Symbol)
+				Dim result As Double = ((coin.lastPrice * 100) / oldPrice) - 100
+				Dim comments As String = String.Concat("Umbral: ", TCoins_percOperation(coin.Symbol, "BUY").ToString("0.00"), ", Current: ", result.ToString("0.0000"))
+
+				TBuysTCoins_NewBuy(coin.Symbol, Now, USDTtoBUY, Qty, coin.lastPrice.ToString(), comments)
+				'If coin.ID.Length > 0 Then TBuysTemp_BorrarID(coin.ID)
 			Next
 
 			Return True
