@@ -198,14 +198,15 @@ Module DB
 	End Function
 
 	'ACTUALIZO TBuys(NUEVA COMPRA) Y TCoins(REMPLAZO CON EL ULTIMO OperationLastPrice y LastOperationDate).
-	Public Function TBuysTCoins_NewBuy(Coin As String, _Date As Date, USDT As String, Quantity As String, MarketPrice As String) As Boolean
+	Public Function TBuysTCoins_NewBuy(Coin As String, _Date As Date, USDT As String, Quantity As String, MarketPrice As String, Optional Comments As String = "") As Boolean
 		Try
 			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
 				SQLiteConnection.Open()
 
+				Dim comment As String = String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, Sensibilidad: ", SENSIBILIDAD_COMPRA.ToString(), "%, ", Comments)
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice, Comments) VALUES (""", Coin, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", MarketPrice.Replace(",", "."), """,""", String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, Sensibilidad: ", SENSIBILIDAD_COMPRA.ToString(), "%"), """);")}
+					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice, Comments) VALUES (""", Coin, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", MarketPrice.Replace(",", "."), """,""", comment, """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
@@ -263,7 +264,7 @@ Module DB
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, Comments) VALUES (""", Coin, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, Sensibilidad: ", SENSIBILIDAD_COMPRA.ToString(), "%"), """);")}
+					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, Comments) VALUES (""", Coin, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%"), """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
