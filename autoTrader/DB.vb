@@ -205,7 +205,7 @@ Module DB
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice) VALUES (""", Coin, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", MarketPrice.Replace(",", "."), """);")}
+					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice, Comments) VALUES (""", Coin, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", MarketPrice.Replace(",", "."), """,""", String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, Sensibilidad: ", SENSIBILIDAD_COMPRA.ToString(), "%"), """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
@@ -263,7 +263,7 @@ Module DB
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT) VALUES (""", Coin, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """);")}
+					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, Comments) VALUES (""", Coin, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, Sensibilidad: ", SENSIBILIDAD_COMPRA.ToString(), "%"), """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
