@@ -43,7 +43,7 @@ Module Web
 				Return String.Concat("_POST(): ", ReaderResult)
 			End If
 		Catch ex As Exception
-			WriteLog("ERR: _POST()")
+			WriteLog(ex.Message & "/ ERR: _POST()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -76,7 +76,7 @@ Module Web
 				Return String.Concat("_GET(): ", ReaderResult)
 			End If
 		Catch ex As Exception
-			WriteLog("ERR: _GET()")
+			WriteLog(ex.Message & "/ ERR: _GET()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -116,7 +116,7 @@ Module Web
 				Return String.Concat("_GET_HMAC(): ", ReaderResult)
 			End If
 		Catch ex As Exception
-			WriteLog("ERR: _GET_HMAC()")
+			WriteLog(ex.Message & "/ ERR: _GET_HMAC()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -128,7 +128,7 @@ Module Web
 			'Return CLng(DateTime.UtcNow.Subtract(New DateTime(1970, 1, 1)).TotalMilliseconds).ToString
 			Return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString
 		Catch ex As Exception
-			WriteLog("ERR: timeStamp1()")
+			WriteLog(ex.Message & "/ ERR: timeStamp1()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -144,7 +144,7 @@ Module Web
 			respuesta = respuesta.Replace("-", "").ToLower
 			Return respuesta
 		Catch ex As Exception
-			WriteLog("ERR: Cifrar()")
+			WriteLog(ex.Message & "/ ERR: Cifrar()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing

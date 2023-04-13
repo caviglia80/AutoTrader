@@ -41,7 +41,7 @@ Module DB
 			End Using
 			Return result
 		Catch ex As Exception
-			WriteLog("ERR: TCoins_isEnabled()")
+			WriteLog(ex.Message & "/ ERR: TCoins_isEnabled()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -77,7 +77,7 @@ Module DB
 				If (max - curren) <= 0 Then Return False Else Return True
 			End Using
 		Catch ex As Exception
-			WriteLog("ERR: TCoinsTBuys_isAvailableToBuy()")
+			WriteLog(ex.Message & "/ ERR: TCoinsTBuys_isAvailableToBuy()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -112,7 +112,7 @@ Module DB
 			Return result
 
 		Catch ex As Exception
-			WriteLog("ERR: TCoins_percOperation()")
+			WriteLog(ex.Message & "/ ERR: TCoins_percOperation()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -136,7 +136,7 @@ Module DB
 			Return result
 
 		Catch ex As Exception
-			WriteLog("ERR: TCoins_percOperation()")
+			WriteLog(ex.Message & "/ ERR: TCoins_percOperation()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -164,7 +164,7 @@ Module DB
 			End Using
 			Return result
 		Catch ex As Exception
-			WriteLog("ERR: TCoins_getLastPriceOperations()")
+			WriteLog(ex.Message & "/ ERR: TCoins_getLastPriceOperations()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -191,7 +191,7 @@ Module DB
 			End Using
 			Return result
 		Catch ex As Exception
-			WriteLog("ERR: TCoins_getListOfCoins()")
+			WriteLog(ex.Message & "/ ERR: TCoins_getListOfCoins()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -230,7 +230,7 @@ Module DB
 			End Using
 			Return True
 		Catch ex As Exception
-			WriteLog("ERR: TBuysTCoins_NewBuy()")
+			WriteLog(ex.Message & "/ ERR: TBuysTCoins_NewBuy()")
 			MsgBox(ex.Message)
 		End Try
 		Return False
@@ -250,7 +250,7 @@ Module DB
 			End Using
 			Return True
 		Catch ex As Exception
-			WriteLog("ERR: TBuys_NowSelled()")
+			WriteLog(ex.Message & "/ ERR: TBuys_NowSelled()")
 			MsgBox(ex.Message)
 		End Try
 		Return False
@@ -302,7 +302,7 @@ Module DB
 			End Using
 			Return True
 		Catch ex As Exception
-			WriteLog("ERR: TSellsTCoins_NewSell()")
+			WriteLog(ex.Message & "/ ERR: TSellsTCoins_NewSell()")
 			MsgBox(ex.Message)
 		End Try
 		Return False
@@ -343,7 +343,7 @@ Module DB
 			End Using
 			Return result
 		Catch ex As Exception
-			WriteLog("ERR: TBuys_getList()")
+			WriteLog(ex.Message & "/ ERR: TBuys_getList()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -368,7 +368,7 @@ Module DB
 			End Using
 			Return result
 		Catch ex As Exception
-			WriteLog("ERR: TBuys_getMarketPrice()")
+			WriteLog(ex.Message & "/ ERR: TBuys_getMarketPrice()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -427,7 +427,7 @@ Module DB
 			MsgBox("BD Borrada")
 			Form1.Dispose()
 		Catch ex As Exception
-			WriteLog("ERR: BD_Restart()")
+			WriteLog(ex.Message & "/ ERR: BD_Restart()")
 			MsgBox(ex.Message)
 		End Try
 	End Sub
@@ -458,7 +458,7 @@ Module DB
 			End Using
 			Return True
 		Catch ex As Exception
-			WriteLog("ERR: TBuysTemp_NewLog()")
+			WriteLog(ex.Message & "/ ERR: TBuysTemp_NewLog()")
 			MsgBox(ex.Message)
 		End Try
 		Return False
@@ -485,7 +485,7 @@ Module DB
 			End Using
 			Return result
 		Catch ex As Exception
-			WriteLog("ERR: TBuysTemp_GetOldPrices()")
+			WriteLog(ex.Message & "/ ERR: TBuysTemp_GetOldPrices()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -506,7 +506,7 @@ Module DB
 			End Using
 
 		Catch ex As Exception
-			WriteLog("ERR: BD_Restart()")
+			WriteLog(ex.Message & "/ ERR: BD_Restart()")
 			MsgBox(ex.Message)
 		End Try
 	End Sub
@@ -524,7 +524,7 @@ Module DB
 			End Using
 			Return True
 		Catch ex As Exception
-			WriteLog("ERR: Tbuys_Comments()")
+			WriteLog(ex.Message & "/ ERR: Tbuys_Comments()")
 			MsgBox(ex.Message)
 		End Try
 		Return False
@@ -560,7 +560,7 @@ Module DB
 
 			Return String.Concat(current1, "/", current2)
 		Catch ex As Exception
-			WriteLog("ERR: TBuys_Completado()")
+			WriteLog(ex.Message & "/ ERR: TBuys_Completado()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -580,7 +580,7 @@ Module DB
 			End Using
 			Return True
 		Catch ex As Exception
-			WriteLog("ERR: TBuysTCoins_NewBuy()")
+			WriteLog(ex.Message & "/ ERR: TBuysTCoins_NewBuy()")
 			MsgBox(ex.Message)
 		End Try
 		Return False
