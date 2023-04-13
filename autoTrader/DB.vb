@@ -203,7 +203,7 @@ Module DB
 			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
 				SQLiteConnection.Open()
 
-				Dim comment As String = String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, Sensibilidad: ", SENSIBILIDAD_COMPRA.ToString(), "%, ", Comments)
+				Dim comment As String = String.Concat("BUY-> BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, Sensibilidad: ", SENSIBILIDAD_COMPRA.ToString(), "%, ", Comments)
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
 					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice, Comments) VALUES (""", Coin, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", MarketPrice.Replace(",", "."), """,""", comment, """);")}
@@ -237,14 +237,21 @@ Module DB
 	End Function
 
 	'ACTUALIZO TBuys(LA MARCO COMO VENDIDA) 
-	Public Function TBuys_NowSelled(ID As Integer) As Boolean
+	Public Function TBuys_NowSelled(Coin As SIMBOLO) As Boolean
 		Try
 			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
 				SQLiteConnection.Open()
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tBuys SET Selled =1 WHERE ID =", ID, ";")}
+					.CommandText = String.Concat("UPDATE tBuys SET Selled =1 WHERE ID =", Coin.ID, ";")}
+					cmd.ExecuteNonQuery()
+				End Using
+
+				Dim Comments As String = String.Concat("SELL-> BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, SL: ", If(Coin.SL, "SI", "NO"))
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("UPDATE tBuys SET Comments=Comments+""", Comments, """ WHERE ID =", Coin, ";")}
 					cmd.ExecuteNonQuery()
 				End Using
 			End Using
