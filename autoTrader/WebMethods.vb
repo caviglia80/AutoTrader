@@ -163,7 +163,7 @@ Module WebMethods
 				Dim GananciaBruta As Double = CDbl(json.StringOf("cummulativeQuoteQty").Replace(".", ","))
 				Dim Qty As Double = CDbl(json.StringOf("executedQty").Replace(".", ","))
 				'ACTUALIZO TBuys(LA MARCO COMO VENDIDA) 
-				TBuys_NowSelled(Coin.ID)
+				TBuys_NowSelled(Coin)
 
 				'ACTUALIZO TSells(INSERTO VENTA) Y TCoins(ACTUALIZO OperationLastPrice, Profit_USDT).
 				TSellsTCoins_NewSell(Coin.Symbol, Now, GananciaBruta, Qty, (GananciaBruta - Coin.USDT), Coin.MarketPrice, Coin)
