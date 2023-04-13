@@ -31,7 +31,7 @@ Module LocalMethods
 
 			Return readyToBuy
 		Catch ex As Exception
-			WriteLog("ERR: GetVariations()")
+			WriteLog("ERR: WeHaveBuys()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -70,7 +70,6 @@ Module LocalMethods
 						'WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "TFalta: ", (coin.lastPrice - (coin.lowPrice + UmbralPermitido)).ToString("0.0000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
 					End If
 				Else
-					'WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "Umbral: ", (coin.lowPrice + UmbralPermitido).ToString("0.000"), vbTab, vbTab, "Current: ", coin.lastPrice.ToString("0.000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
 					WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "Sensibilidad: ", SENSIBILIDAD_COMPRA, "%  Falta: ", Math.Max(coin.lastPrice - (coin.lowPrice + UmbralPermitido), 0).ToString("0.00000000"), vbTab, " OP: ", oldPrice.ToString("0.00000000"), vbTab, " NP: ", coin.lastPrice.ToString("0.00000000")))
 					'WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "TFalta: ", (coin.lastPrice - (coin.lowPrice + UmbralPermitido)).ToString("0.0000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
 				End If
@@ -195,29 +194,22 @@ Module LocalMethods
 				Dim coinRT As SIMBOLO = prices.Find(Function(x) x.Symbol.Contains(coinBuyed.Symbol))
 				Dim precentageAllowedSELL As Double = TCoins_percOperation(coinBuyed.Symbol, "SELL")        'OBTENGO EL PORCENTAGE CONFIGURADO DE LA COIN PARA VENTA
 				Dim oldPrice As Double = coinBuyed.MarketPrice
-
-				'TBuys_getMarketPrice(currentCoin.Symbol)
 				Dim newPrice As Double = coinRT.Price
 
-				'MsgBox(coinRT.Price & " " & coinRT.lastPrice)
-
-				'coinBuyed.MarketPrice = currentCoin.MarketPrice
 				coinBuyed.StopLost = TCoins_getStopLost(coinRT.Symbol)
 
 				'REGLA DE 3 SIMPLES PARA SABER EL PORCENTAJE DE CAMBIO
 				Dim result As Double = ((newPrice * 100) / oldPrice) - 100
 
-				'MsgBox(result & "      " & coinBuyed.symbol & "      " & coinBuyed.quantity & "      " & precentageAllowedSELL)
 				WriteLog(String.Concat(vbTab, "| ", coinBuyed.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "Umbral: ", precentageAllowedSELL.ToString, vbTab, "SL: ", coinBuyed.StopLost.ToString, vbTab, " OP: ", oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "NP: ", newPrice.ToString).Replace(",", "."))
 
 				'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MAYOR QUE EL CONFIGURADO (precentageAllowedSELL), SE VENDE (INVERSA EN COMPRA)
 				If result >= precentageAllowedSELL Then
-					'MsgBox("esta esta para vender    " & coinBuyed.symbol & "    " & coinBuyed.MarketPrice)
 					readyToSell.Add(coinBuyed)
 
-					'ElseIf result < coinBuyed.StopLost Then
-					'	coinBuyed.SL = True
-					'	readyToSell.Add(coinBuyed)
+				ElseIf result < coinBuyed.StopLost Then
+					coinBuyed.SL = True
+					readyToSell.Add(coinBuyed)
 				End If
 			Next
 
@@ -296,6 +288,16 @@ Module LocalMethods
 			Else
 				My.Computer.Audio.Play("C:\GitHub\AutoTrader\autoTrader\noProfit.wav", AudioPlayMode.Background)
 			End If
+		Catch ex As Exception
+			MsgBox(ex.Message)
+		End Try
+	End Sub
+
+	Public Sub Metricas()
+		Try
+			For Each Coin As String In TCoins_getListOfCoins()
+				TCoins_SET_Completado(Coin, TBuys_GET_Completado(Coin))
+			Next
 		Catch ex As Exception
 			MsgBox(ex.Message)
 		End Try

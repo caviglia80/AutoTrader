@@ -138,35 +138,35 @@ Module WebMethods
 	'REALIZO LAS VENTAS
 	Public Function WebPost_TrySELL(coinList As List(Of SIMBOLO)) As Boolean
 		Try
-			For Each C In coinList
+			For Each Coin In coinList
 				Dim respPost As String = ""
-				If Not debugMode Then respPost = _POST("/api/v3/order", C.Symbol, "SELL", CStr(C.Quantity))
+				If Not debugMode Then respPost = _POST("/api/v3/order", Coin.Symbol, "SELL", CStr(Coin.Quantity))
 				If IsError(respPost) Then
 					WriteLog("Error en venta.")
 					Continue For
 				End If
 
-				If C.SL Then
-					WriteLog(String.Concat(vbTab, "|", vbTab, "VENTA STOP LOST (", C.Symbol, ")", vbTab, "SL: ", C.StopLost.ToString().Replace(",", "."), vbTab, "BTC: ", CAMBIO24HS_BTC.ToString().Replace(",", "."), "%"))
+				If Coin.SL Then
+					WriteLog(String.Concat(vbTab, "|", vbTab, "VENTA STOP LOST (", Coin.Symbol, ")", vbTab, "SL: ", Coin.StopLost.ToString().Replace(",", "."), vbTab, "BTC: ", CAMBIO24HS_BTC.ToString().Replace(",", "."), "%"))
 					Sonido(False)
 				Else
-					WriteLog(String.Concat(vbTab, "|", vbTab, "VENTA PROFIT (", C.Symbol, ") ", vbTab, "BTC: ", CAMBIO24HS_BTC.ToString().Replace(",", "."), "%"))
+					WriteLog(String.Concat(vbTab, "|", vbTab, "VENTA PROFIT (", Coin.Symbol, ") ", vbTab, "BTC: ", CAMBIO24HS_BTC.ToString().Replace(",", "."), "%"))
 					Sonido(True)
 				End If
 
 				Dim json As New Chilkat.JsonObject()
-				If debugMode Then json.Load(CargamosDatosDePrueba(C.Symbol, "SELL", C.Quantity, C.MarketPrice)) Else json.Load(respPost)
+				If debugMode Then json.Load(CargamosDatosDePrueba(Coin.Symbol, "SELL", Coin.Quantity, Coin.MarketPrice)) Else json.Load(respPost)
 
-				'MsgBox(C.MarketPrice.ToString)
+				'MsgBox(Coin.MarketPrice.ToString)
 				'MsgBox(json.StringOf("cummulativeQuoteQty"))
 
 				Dim GananciaBruta As Double = CDbl(json.StringOf("cummulativeQuoteQty").Replace(".", ","))
 				Dim Qty As Double = CDbl(json.StringOf("executedQty").Replace(".", ","))
 				'ACTUALIZO TBuys(LA MARCO COMO VENDIDA) 
-				TBuys_NowSelled(C.ID)
+				TBuys_NowSelled(Coin.ID)
 
 				'ACTUALIZO TSells(INSERTO VENTA) Y TCoins(ACTUALIZO OperationLastPrice, Profit_USDT).
-				TSellsTCoins_NewSell(C.Symbol, Now, GananciaBruta, Qty, (GananciaBruta - C.USDT), C.MarketPrice)
+				TSellsTCoins_NewSell(Coin.Symbol, Now, GananciaBruta, Qty, (GananciaBruta - Coin.USDT), Coin.MarketPrice, Coin)
 			Next
 
 			Return True

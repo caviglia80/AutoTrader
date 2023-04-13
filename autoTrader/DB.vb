@@ -257,14 +257,15 @@ Module DB
 	End Function
 
 	'ACTUALIZO TSells(INSERTO VENTA) Y TCoins(ACTUALIZO OperationLastPrice, Profit_USDT, Profit_Quantity).
-	Public Function TSellsTCoins_NewSell(Coin As String, _Date As Date, ProfitUSDTbr As Double, Quantity As Double, ProfitUSDT As Double, marketPrice As Double) As Boolean
+	Public Function TSellsTCoins_NewSell(Coin As String, _Date As Date, ProfitUSDTbr As Double, Quantity As Double, ProfitUSDT As Double, marketPrice As Double, moneda As SIMBOLO) As Boolean
 		Try
 			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
 				SQLiteConnection.Open()
 
+				Dim Comments As String = String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, SL: ", If(moneda.SL, "SI", "NO"))
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, Comments) VALUES (""", Coin, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%"), """);")}
+					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, Comments) VALUES (""", Coin, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", Comments, """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
@@ -367,7 +368,7 @@ Module DB
 			End Using
 			Return result
 		Catch ex As Exception
-			WriteLog("ERR: TCoins_getLastPriceOperations()")
+			WriteLog("ERR: TBuys_getMarketPrice()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -529,13 +530,61 @@ Module DB
 		Return False
 	End Function
 
+	'LEER tBuys(obtener fraccion de completado)
+	Public Function TBuys_GET_Completado(Coin As String) As String
+		Try
+			Dim current1 As Integer = 0
+			Dim current2 As Integer = 0
 
+			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
+				SQLiteConnection.Open()
 
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("SELECT COUNT(*) FROM tBuys WHERE Coin=""", Coin, """ AND Selled=1;")}
+					Dim SQLiteReader As SQLiteDataReader = cmd.ExecuteReader()
+					SQLiteReader.Read()
+					current1 = CInt(SQLiteReader(0))
+					SQLiteReader.Close()
+				End Using
 
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("SELECT COUNT(*) FROM tBuys WHERE Coin=""", Coin, """;")}
+					Dim SQLiteReader As SQLiteDataReader = cmd.ExecuteReader()
+					SQLiteReader.Read()
+					current2 = CInt(SQLiteReader(0))
+					SQLiteReader.Close()
+				End Using
+			End Using
 
+			Return String.Concat(current1, "/", current2)
+		Catch ex As Exception
+			WriteLog("ERR: TBuys_Completado()")
+			MsgBox(ex.Message)
+		End Try
+		Return Nothing
+	End Function
 
+	'ACTUALIZO tCoins Completado
+	Public Function TCoins_SET_Completado(Coin As String, Conteo As String) As Boolean
+		Try
+			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
+				SQLiteConnection.Open()
 
-
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("UPDATE tCoins SET Completado = """, Conteo, """ WHERE Coin =""", Coin, """;")}
+					cmd.ExecuteNonQuery()
+				End Using
+			End Using
+			Return True
+		Catch ex As Exception
+			WriteLog("ERR: TBuysTCoins_NewBuy()")
+			MsgBox(ex.Message)
+		End Try
+		Return False
+	End Function
 
 
 

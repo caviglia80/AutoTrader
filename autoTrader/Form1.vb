@@ -21,7 +21,7 @@ Public Class Form1
 
 
 
-
+		'MsgBox(TBuys_Completado("CFXUSDT"))
 
 
 
@@ -55,6 +55,8 @@ Public Class Form1
 				WriteLog("SERVIDOR EN MANTENIMIENTO (ESPERANDO 5 MIN)")
 				System.Threading.Thread.Sleep(300000)
 			End If
+
+			Metricas()
 
 			tBatch.Start()
 		Catch ex As Exception
