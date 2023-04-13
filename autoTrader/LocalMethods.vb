@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 
 
 Module LocalMethods
@@ -163,6 +163,7 @@ Module LocalMethods
 			Return QuantityNormalized(coin, result.ToString)
 		Catch ex As Exception
 			MsgBox(ex.Message)
+			WriteLog(ex.Message & "/ ERR: calculateQuantityToBuy()")
 		End Try
 		WriteLog(ex.Message & "/ ERR: calculateQuantityToBuy()")
 		Return Nothing
