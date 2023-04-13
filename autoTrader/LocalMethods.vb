@@ -31,7 +31,7 @@ Module LocalMethods
 
 			Return readyToBuy
 		Catch ex As Exception
-			WriteLog("ERR: WeHaveBuys()")
+			WriteLog(ex.Message & "/ ERR: WeHaveBuys()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -77,7 +77,7 @@ Module LocalMethods
 
 			Return readyToBuy
 		Catch ex As Exception
-			WriteLog("ERR: WeHaveBuysV2()")
+			WriteLog(ex.Message & "/ ERR: WeHaveBuysV2()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -108,7 +108,7 @@ Module LocalMethods
 
 						Return Qty.Trim
 					Catch ex As Exception
-						WriteLog("ERR: QuantityNormalized() 4")
+						WriteLog(ex.Message & "/ ERR: QuantityNormalized() 4")
 						WriteLog(JsonResponse)
 						MsgBox(ex.Message)
 					End Try
@@ -139,18 +139,18 @@ Module LocalMethods
 
 						Return Qty.Trim
 					Catch ex As Exception
-						WriteLog("ERR: QuantityNormalized() 3")
+						WriteLog(ex.Message & "/ ERR: QuantityNormalized() 3")
 						WriteLog(JsonResponse)
 						MsgBox(ex.Message)
 					End Try
 				End If
 			Catch ex As Exception
-				WriteLog("ERR: QuantityNormalized() 2")
+				WriteLog(ex.Message & "/ ERR: QuantityNormalized() 2")
 				WriteLog(JsonResponse)
 				MsgBox(ex.Message)
 			End Try
 		Catch ex As Exception
-			WriteLog("ERR: QuantityNormalized() 1")
+			WriteLog(ex.Message & "/ ERR: QuantityNormalized() 1")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -164,7 +164,7 @@ Module LocalMethods
 		Catch ex As Exception
 			MsgBox(ex.Message)
 		End Try
-		WriteLog("ERR: calculateQuantityToBuy()")
+		WriteLog(ex.Message & "/ ERR: calculateQuantityToBuy()")
 		Return Nothing
 	End Function
 
@@ -215,7 +215,7 @@ Module LocalMethods
 
 			Return readyToSell
 		Catch ex As Exception
-			WriteLog("ERR: WeHaveSells()")
+			WriteLog(ex.Message & "/ ERR: WeHaveSells()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing

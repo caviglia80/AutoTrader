@@ -21,7 +21,7 @@ Module WebMethods
 			Return JsonConvert.DeserializeObject(Of List(Of SIMBOLO))(JsonResponse)
 
 		Catch ex As Exception
-			WriteLog("ERR: WEB_GetPriceList()")
+			WriteLog(ex.Message & "/ ERR: WEB_GetPriceList()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -44,7 +44,7 @@ Module WebMethods
 			Return JsonConvert.DeserializeObject(Of List(Of SIMBOLO))(JsonResponse)
 
 		Catch ex As Exception
-			WriteLog("ERR: WEB_GetPriceList24h()")
+			WriteLog(ex.Message & "/ ERR: WEB_GetPriceList24h()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -64,7 +64,7 @@ Module WebMethods
 			If count > 0 Then Return False
 
 		Catch ex As Exception
-			WriteLog("ERR: WEB_ValidSymbols()")
+			WriteLog(ex.Message & "/ ERR: WEB_ValidSymbols()")
 			MsgBox(ex.Message)
 		End Try
 		Return True
@@ -82,7 +82,7 @@ Module WebMethods
 			json.Load(JsonResponse)
 			Return json.StringOf("lastPrice").Replace(".", ",")
 		Catch ex As Exception
-			WriteLog("ERR: WEBGet_Price()")
+			WriteLog(ex.Message & "/ ERR: WEBGet_Price()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -129,7 +129,7 @@ Module WebMethods
 
 			Return True
 		Catch ex As Exception
-			WriteLog("ERR: WebPost_TryBUY()")
+			WriteLog(ex.Message & "/ ERR: WebPost_TryBUY()")
 			MsgBox(ex.Message)
 		End Try
 		Return False
@@ -171,7 +171,7 @@ Module WebMethods
 
 			Return True
 		Catch ex As Exception
-			WriteLog("ERR: WebPost_TrySELL()")
+			WriteLog(ex.Message & "/ ERR: WebPost_TrySELL()")
 			MsgBox(ex.Message)
 		End Try
 		Return False
@@ -187,7 +187,7 @@ Module WebMethods
 			json.Load(JsonResponse)
 			Return If(CInt(json.StringOf("status")) = 0, False, True)
 		Catch ex As Exception
-			WriteLog("ERR: WebGet_Maintenance()")
+			WriteLog(ex.Message & "/ ERR: WebGet_Maintenance()")
 			MsgBox(ex.Message)
 		End Try
 		Return True
@@ -203,7 +203,7 @@ Module WebMethods
 			json.Load(JsonResponse)
 			Return CBool(json.StringOf("data.isLocked"))
 		Catch ex As Exception
-			WriteLog("ERR: WEBGet_AccountAPITrading_isBlocked()")
+			WriteLog(ex.Message & "/ ERR: WEBGet_AccountAPITrading_isBlocked()")
 			MsgBox(ex.Message)
 		End Try
 		Return True
@@ -218,7 +218,7 @@ Module WebMethods
 			json.Load(JsonResponse)
 			Return CDbl(json.StringOf("priceChangePercent").Replace(".", ","))
 		Catch ex As Exception
-			WriteLog("ERR: WebGet_Maintenance()")
+			WriteLog(ex.Message & "/ ERR: WebGet_Maintenance()")
 			MsgBox(ex.Message)
 		End Try
 		Return True
