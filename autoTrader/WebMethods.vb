@@ -103,7 +103,7 @@ Module WebMethods
 					Continue For         'SI LLEGO AL MAXIMO DE COMPRAS SIMULTANEAS, LA SALTEO
 				End If
 
-				Dim QuantityToBuy As String = calculateQuantityToBuy(coin.Symbol, coin.lastPrice, USDT_A_GASTAR_PER_COIN)
+				Dim QuantityToBuy As String = calculateQuantityToBuy(coin.Symbol, coin.lastPrice, TCoins_getInversion(coin.Symbol))
 				Dim respPost As String = ""
 				If Not debugMode Then respPost = _POST("/api/v3/order", coin.Symbol, "BUY", QuantityToBuy)
 

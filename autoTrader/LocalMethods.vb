@@ -39,8 +39,6 @@ Module LocalMethods
 
 	Public Function WeHaveBuysV2() As List(Of SIMBOLO)
 		Try
-			Dim asdsfdaf As New List(Of String)
-
 			Dim readyToBuy As New List(Of SIMBOLO)
 
 			For Each coin In WEB_GetPriceList24h(TCoins_getListOfCoins())
@@ -264,7 +262,7 @@ Module LocalMethods
 			Dim JsonResponse As String = File.ReadAllText("C:\GitHub\AutoTrader\autoTrader\TEST\BUY_SELL.txt")
 			'Dim USDTtest As String = CStr(USDT_A_GASTAR_PER_COIN - ((USDT_A_GASTAR_PER_COIN * 0.3) / 100))
 
-			Dim USDTtest As String = CStr(USDT_A_GASTAR_PER_COIN)
+			Dim USDTtest As String = CStr(TCoins_getInversion(coin))
 			JsonResponse = JsonResponse.Replace("executedQty1", CStr(Qty).Replace(",", ".")) 'QTY
 
 			If side = "BUY" Then

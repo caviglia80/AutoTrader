@@ -580,13 +580,35 @@ Module DB
 			End Using
 			Return True
 		Catch ex As Exception
-			WriteLog(ex.Message & "/ ERR: TBuysTCoins_NewBuy()")
+			WriteLog(ex.Message & "/ ERR: TCoins_SET_Completado()")
 			MsgBox(ex.Message)
 		End Try
 		Return False
 	End Function
 
+	'LEER TCoins(OBTENER INVERSION)
+	Public Function TCoins_getInversion(Coin As String) As Double
+		Try
+			Dim result As Double = 0
+			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
+				SQLiteConnection.Open()
 
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("SELECT Inversion FROM tCoins WHERE Coin=""", Coin, """;")}
+					Dim SQLiteReader As SQLiteDataReader = cmd.ExecuteReader()
+					SQLiteReader.Read()
+					result = CDbl(SQLiteReader(0))
+					SQLiteReader.Close()
+				End Using
+			End Using
+			Return result
+		Catch ex As Exception
+			WriteLog(ex.Message & "/ ERR: TCoins_getListOfCoins()")
+			MsgBox(ex.Message)
+		End Try
+		Return Nothing
+	End Function
 
 
 
