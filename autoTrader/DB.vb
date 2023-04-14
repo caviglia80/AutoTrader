@@ -244,14 +244,14 @@ Module DB
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tBuys SET Selled =1 WHERE ID =", Coin.ID, ";")}
+					.CommandText = String.Concat("UPDATE tBuys SET Selled=1 WHERE ID=", Coin.ID, ";")}
 					cmd.ExecuteNonQuery()
 				End Using
 
 				Dim Comments As String = String.Concat("SELL-> BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, SL: ", If(Coin.SL, "SI", "NO"))
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tBuys SET Comments=Comments+""", Comments, """ WHERE ID =", Coin, ";")}
+					.CommandText = String.Concat("UPDATE tBuys SET Comments=Comments+""", Comments, """ WHERE ID =", Coin.ID, ";")}
 					cmd.ExecuteNonQuery()
 				End Using
 			End Using
