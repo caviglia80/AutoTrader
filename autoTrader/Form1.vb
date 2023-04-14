@@ -35,7 +35,7 @@ Public Class Form1
 			If Not WebGet_Maintenance() Then
 				If Not WEBGet_AccountAPITrading_isBlocked() Then
 
-					For i = 5 To 70 Step +5
+					For i = 5 To 45 Step +5
 						LabelBTC()
 						SENSIBILIDAD_COMPRA = i
 						Await Task.Run(Sub()
