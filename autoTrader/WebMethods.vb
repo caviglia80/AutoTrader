@@ -238,9 +238,9 @@ Module WebMethods
 			Dim movingAverage As Decimal = closingPrices.Average()
 
 			If lastPrice > movingAverage Then
-				Return String.Concat("ALZA,", interval, ",", limit.ToString())
+				Return String.Concat("ALZA(", interval, ",", limit.ToString(), ")")
 			Else
-				Return String.Concat("BAJA,", interval, ",", limit.ToString())
+				Return String.Concat("BAJA(", interval, ",", limit.ToString(), ")")
 			End If
 		Catch ex As Exception
 			MsgBox(ex.Message)
