@@ -198,7 +198,7 @@ Module DB
 	End Function
 
 	'ACTUALIZO TBuys(NUEVA COMPRA) Y TCoins(REMPLAZO CON EL ULTIMO OperationLastPrice y LastOperationDate).
-	Public Function TBuysTCoins_NewBuy(Coin As String, _Date As Date, USDT As String, Quantity As String, MarketPrice As String, Optional Comments As String = "") As Boolean
+	Public Function TBuysTCoins_NewBuy(Coin As SIMBOLO, _Date As Date, USDT As String, Quantity As String, Optional Comments As String = "") As Boolean
 		Try
 			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
 				SQLiteConnection.Open()
@@ -206,25 +206,25 @@ Module DB
 				Dim comment As String = String.Concat("BUY-> BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, Sensibilidad: ", SENSIBILIDAD_COMPRA.ToString(), "%, ", Comments)
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice, Comments) VALUES (""", Coin, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", MarketPrice.Replace(",", "."), """,""", comment, """);")}
+					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice, Comments) VALUES (""", Coin.Symbol, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", Coin.lastPrice.ToString().Replace(",", "."), """,""", comment, """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tCoins SET OperationLastPrice =""", MarketPrice.Replace(",", "."), """ WHERE Coin =""", Coin, """;")}
+					.CommandText = String.Concat("UPDATE tCoins SET OperationLastPrice =""", Coin.lastPrice.ToString().Replace(",", "."), """ WHERE Coin =""", Coin.Symbol, """;")}
 					cmd.ExecuteNonQuery()
 				End Using
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tCoins SET LastOperationDate =""", _Date, """ WHERE Coin =""", Coin, """;")}
+					.CommandText = String.Concat("UPDATE tCoins SET LastOperationDate =""", _Date, """ WHERE Coin =""", Coin.Symbol, """;")}
 					cmd.ExecuteNonQuery()
 				End Using
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tCoins SET Quantity = Quantity + """, Quantity, """ WHERE Coin =""", Coin, """;")}
+					.CommandText = String.Concat("UPDATE tCoins SET Quantity = Quantity + """, Quantity, """ WHERE Coin =""", Coin.Symbol, """;")}
 					cmd.ExecuteNonQuery()
 				End Using
 			End Using
@@ -248,10 +248,16 @@ Module DB
 					cmd.ExecuteNonQuery()
 				End Using
 
-				Dim Comments As String = String.Concat(", SELL-> BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, SL: ", If(Coin.SL, "SI", "NO"))
+				Dim Comments As String = String.Concat(", SELL-> BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, ")
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tBuys SET Comments=Comments||""", Comments, """ WHERE ID =", Coin.ID, ";")}
+					.CommandText = String.Concat("UPDATE tBuys SET Comments=Comments||""", Comments, """ WHERE ID=", Coin.ID, ";")}
+					cmd.ExecuteNonQuery()
+				End Using
+
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("UPDATE tBuys SET SL=""", If(Coin.SL, "SI", "NO"), """ WHERE ID=", Coin.ID, ";")}
 					cmd.ExecuteNonQuery()
 				End Using
 			End Using
@@ -264,45 +270,45 @@ Module DB
 	End Function
 
 	'ACTUALIZO TSells(INSERTO VENTA) Y TCoins(ACTUALIZO OperationLastPrice, Profit_USDT, Profit_Quantity).
-	Public Function TSellsTCoins_NewSell(Coin As String, _Date As Date, ProfitUSDTbr As Double, Quantity As Double, ProfitUSDT As Double, marketPrice As Double, moneda As SIMBOLO) As Boolean
+	Public Function TSellsTCoins_NewSell(Coin As SIMBOLO, _Date As Date, ProfitUSDTbr As Double, Quantity As Double, ProfitUSDT As Double) As Boolean
 		Try
 			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
 				SQLiteConnection.Open()
 
-				Dim Comments As String = String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, SL: ", If(moneda.SL, "SI", "NO"))
+				Dim Comments As String = String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, ")
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, Comments) VALUES (""", Coin, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", Comments, """);")}
+					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, SL, Comments) VALUES (""", Coin.Symbol, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", If(Coin.SL, "SI", "NO"), """,""", Comments, """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tCoins SET OperationLastPrice =""", CStr(marketPrice).Replace(",", "."), """ WHERE Coin =""", Coin, """;")}
+					.CommandText = String.Concat("UPDATE tCoins SET OperationLastPrice =""", CStr(Coin.MarketPrice).Replace(",", "."), """ WHERE Coin =""", Coin.Symbol, """;")}
 					cmd.ExecuteNonQuery()
 				End Using
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tCoins SET LastOperationDate =""", _Date, """ WHERE Coin =""", Coin, """;")}
+					.CommandText = String.Concat("UPDATE tCoins SET LastOperationDate =""", _Date, """ WHERE Coin =""", Coin.Symbol, """;")}
 					cmd.ExecuteNonQuery()
 				End Using
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tCoins SET ProfitUSDT=ProfitUSDT+""", CStr(ProfitUSDT).Replace(",", "."), """ WHERE Coin =""", Coin, """;")}
+					.CommandText = String.Concat("UPDATE tCoins SET ProfitUSDT=ProfitUSDT+""", CStr(ProfitUSDT).Replace(",", "."), """ WHERE Coin =""", Coin.Symbol, """;")}
 					cmd.ExecuteNonQuery()
 				End Using
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tCoins SET Quantity=Quantity-""", CStr(Quantity).Replace(",", "."), """ WHERE Coin =""", Coin, """;")}
+					.CommandText = String.Concat("UPDATE tCoins SET Quantity=Quantity-""", CStr(Quantity).Replace(",", "."), """ WHERE Coin =""", Coin.Symbol, """;")}
 					cmd.ExecuteNonQuery()
 				End Using
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tCoins SET OperationLastPrice =""", CStr(marketPrice).Replace(",", "."), """ WHERE Coin =""", Coin, """;")}
+					.CommandText = String.Concat("UPDATE tCoins SET OperationLastPrice =""", CStr(Coin.MarketPrice).Replace(",", "."), """ WHERE Coin =""", Coin.Symbol, """;")}
 					cmd.ExecuteNonQuery()
 				End Using
 
