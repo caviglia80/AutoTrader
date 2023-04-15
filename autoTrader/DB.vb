@@ -413,6 +413,12 @@ Module DB
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("UPDATE tCoins SET Completado=""0/0"";")}
+					cmd.ExecuteNonQuery()
+				End Using
+
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
 					.CommandText = String.Concat("UPDATE tCoins SET LastOperationDate=0;")}
 					cmd.ExecuteNonQuery()
 				End Using
