@@ -445,85 +445,6 @@ Module DB
 		End Try
 	End Sub
 
-	'ACTUALIZO tBuysTemp
-	Public Function TBuysTemp_NewLog(Coin As String, _Date As Date, MarketPrice As String) As Boolean
-		Try
-			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
-				SQLiteConnection.Open()
-
-				Using cmd As New SQLiteCommand With {
-					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tBuysTemp (Coin, Date, MarketPrice) VALUES (""", Coin, """,""", _Date, """,""", MarketPrice.Replace(",", "."), """);")}
-					cmd.ExecuteNonQuery()
-				End Using
-
-				Using cmd As New SQLiteCommand With {
-					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tCoins SET OperationLastPrice =""", MarketPrice.Replace(",", "."), """ WHERE Coin =""", Coin, """;")}
-					cmd.ExecuteNonQuery()
-				End Using
-
-				Using cmd As New SQLiteCommand With {
-					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("UPDATE tCoins SET LastOperationDate =""", _Date, """ WHERE Coin =""", Coin, """;")}
-					cmd.ExecuteNonQuery()
-				End Using
-			End Using
-			Return True
-		Catch ex As Exception
-			WriteLog(ex.Message & "/ ERR: TBuysTemp_NewLog()")
-			MsgBox(ex.Message)
-		End Try
-		Return False
-	End Function
-
-	'LEER tBuysTemp
-	Public Function TBuysTemp_GetOldPrices() As List(Of SIMBOLO)
-		Try
-			Dim result As New List(Of SIMBOLO)
-			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
-				SQLiteConnection.Open()
-
-				Using cmd As New SQLiteCommand With {
-					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("SELECT ID, Coin, MarketPrice FROM tBuysTemp;")}
-					Dim SQLiteReader As SQLiteDataReader = cmd.ExecuteReader()
-
-					While SQLiteReader.Read()
-						result.Add(New SIMBOLO(CStr(SQLiteReader(0)), CStr(SQLiteReader(1)), CStr(SQLiteReader(2))))
-					End While
-
-					SQLiteReader.Close()
-				End Using
-			End Using
-			Return result
-		Catch ex As Exception
-			WriteLog(ex.Message & "/ ERR: TBuysTemp_GetOldPrices()")
-			MsgBox(ex.Message)
-		End Try
-		Return Nothing
-	End Function
-
-	'BORRAR tBuysTemp ID
-	Public Sub TBuysTemp_BorrarID(ID As String)
-		Try
-			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
-				SQLiteConnection.Open()
-
-				Using cmd As New SQLiteCommand With {
-					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("DELETE FROM tBuysTemp WHERE ID =", ID, ";")}
-					cmd.ExecuteNonQuery()
-				End Using
-
-			End Using
-
-		Catch ex As Exception
-			WriteLog(ex.Message & "/ ERR: BD_Restart()")
-			MsgBox(ex.Message)
-		End Try
-	End Sub
-
 	'ACTUALIZO Comments en Tbuys
 	Public Function Table_Comments(Table As String, ID As String, Comment As String) As Boolean
 		Try
@@ -623,7 +544,84 @@ Module DB
 		Return Nothing
 	End Function
 
+	'ACTUALIZO tBuysTemp
+	Public Function TBuysTemp_NewLog(Coin As SIMBOLO) As Boolean
+		Try
+			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
+				SQLiteConnection.Open()
 
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("INSERT INTO tBuysTemp (Coin, MarketPrice, Date) VALUES (""", Coin.Symbol, """,""", Coin.MarketPrice.ToString().Replace(",", "."), """,""", Now, """);")}
+					cmd.ExecuteNonQuery()
+				End Using
+
+				'Using cmd As New SQLiteCommand With {
+				'	.Connection = SQLiteConnection,
+				'	.CommandText = String.Concat("UPDATE tCoins SET OperationLastPrice =""", MarketPrice.Replace(",", "."), """ WHERE Coin =""", Coin, """;")}
+				'	cmd.ExecuteNonQuery()
+				'End Using
+
+				'Using cmd As New SQLiteCommand With {
+				'	.Connection = SQLiteConnection,
+				'	.CommandText = String.Concat("UPDATE tCoins SET LastOperationDate =""", _Date, """ WHERE Coin =""", Coin, """;")}
+				'	cmd.ExecuteNonQuery()
+				'End Using
+			End Using
+			Return True
+		Catch ex As Exception
+			WriteLog(ex.Message & "/ ERR: TBuysTemp_NewLog()")
+			MsgBox(ex.Message)
+		End Try
+		Return False
+	End Function
+
+	'LEER tBuysTemp
+	Public Function TBuysTemp_GetOldPrices() As List(Of SIMBOLO)
+		Try
+			Dim result As New List(Of SIMBOLO)
+			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
+				SQLiteConnection.Open()
+
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("SELECT ID, Coin, MarketPrice FROM tBuysTemp;")}
+					Dim SQLiteReader As SQLiteDataReader = cmd.ExecuteReader()
+
+					While SQLiteReader.Read()
+						result.Add(New SIMBOLO(CStr(SQLiteReader(0)), CStr(SQLiteReader(1)), CStr(SQLiteReader(2))))
+					End While
+
+					SQLiteReader.Close()
+				End Using
+			End Using
+			Return result
+		Catch ex As Exception
+			WriteLog(ex.Message & "/ ERR: TBuysTemp_GetOldPrices()")
+			MsgBox(ex.Message)
+		End Try
+		Return Nothing
+	End Function
+
+	'BORRAR tBuysTemp ID
+	Public Sub TBuysTemp_BorrarID(ID As String)
+		Try
+			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
+				SQLiteConnection.Open()
+
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("DELETE FROM tBuysTemp WHERE ID =", ID, ";")}
+					cmd.ExecuteNonQuery()
+				End Using
+
+			End Using
+
+		Catch ex As Exception
+			WriteLog(ex.Message & "/ ERR: TBuysTemp_BorrarID()")
+			MsgBox(ex.Message)
+		End Try
+	End Sub
 
 
 
