@@ -204,9 +204,10 @@ Module DB
 				SQLiteConnection.Open()
 
 				Dim comment As String = String.Concat("BUY-> BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, Sensibilidad: ", SENSIBILIDAD_COMPRA.ToString(), "%, ", Comments)
+				Dim tend As String = String.Concat(Tendencia(Coin.Symbol, "15m", 6), "/", Tendencia(Coin.Symbol, "30m", 10), "/", Tendencia(Coin.Symbol, "1h", 12))
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice, Comments, Tendencia) VALUES (""", Coin.Symbol, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", Coin.lastPrice.ToString().Replace(",", "."), """,""", comment, """,""", Tendencia("BTCUSDT", "1h", 24), """);")}
+					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice, Comments, Tendencia) VALUES (""", Coin.Symbol, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", Coin.lastPrice.ToString().Replace(",", "."), """,""", comment, """,""", tend, """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
@@ -276,9 +277,10 @@ Module DB
 				SQLiteConnection.Open()
 
 				Dim Comments As String = String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, ")
+				Dim tend As String = String.Concat(Tendencia(Coin.Symbol, "15m", 6), "/", Tendencia(Coin.Symbol, "30m", 10), "/", Tendencia(Coin.Symbol, "1h", 12))
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, SL, Comments, Tendencia) VALUES (""", Coin.Symbol, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", If(Coin.SL, "SI", "NO"), """,""", Comments, """,""", Tendencia("BTCUSDT", "1h", 24), """);")}
+					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, SL, Comments, Tendencia) VALUES (""", Coin.Symbol, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", If(Coin.SL, "SI", "NO"), """,""", Comments, """,""", tend, """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
