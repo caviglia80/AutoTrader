@@ -1,41 +1,39 @@
 ﻿Imports System.IO
-
-
 Module LocalMethods
 
 
 	'DEVUELVO LOS NOMBRES Y PRECIOS DE LAS MONEDAS A COMPRAR
-	Public Function WeHaveBuys() As List(Of SIMBOLO)
-		Try
-			Dim readyToBuy As New List(Of SIMBOLO)
+	'Public Function WeHaveBuys() As List(Of SIMBOLO)
+	'	Try
+	'		Dim readyToBuy As New List(Of SIMBOLO)
 
-			For Each coin In WEB_GetPriceList(TCoins_getListOfCoins())
+	'		For Each coin In WEB_GetPriceList(TCoins_getListOfCoins())
 
-				Dim oldPrice As Double = TCoins_getLastPriceOperations(coin.Symbol)             'OBTENGO COIN LOCAL, ultimo precio registrado, YA SEA ULTIMA COMPRA O ULTIMA VENTA
-				Dim newPrice As Double = coin.MarketPrice                                             'OBTENGO LA LISTA REMOTA DE PRECIOS
-				Dim precentageAllowedBUY As Double = TCoins_percOperation(coin.Symbol, "BUY")   'OBTENGO EL PORCENTAGE CONFIGURADO DE LA COIN
+	'			Dim oldPrice As Double = TCoins_getLastPriceOperations(coin.Symbol)             'OBTENGO COIN LOCAL, ultimo precio registrado, YA SEA ULTIMA COMPRA O ULTIMA VENTA
+	'			Dim newPrice As Double = coin.MarketPrice                                             'OBTENGO LA LISTA REMOTA DE PRECIOS
+	'			Dim precentageAllowedBUY As Double = TCoins_percOperation(coin.Symbol, "BUY")   'OBTENGO EL PORCENTAGE CONFIGURADO DE LA COIN
 
-				Dim result As Double = ((newPrice * 100) / oldPrice) - 100 'REGLA DE 3 SIMPLES PARA SABER EL PORCENTAJE DE CAMBIO
+	'			Dim result As Double = ((newPrice * 100) / oldPrice) - 100 'REGLA DE 3 SIMPLES PARA SABER EL PORCENTAJE DE CAMBIO
 
-				'MsgBox(coin.symbol & "  SUBIO O BAJO UN % :  " & (result).ToString & "   " & precentageAllowedBUY.ToString)
+	'			'MsgBox(coin.symbol & "  SUBIO O BAJO UN % :  " & (result).ToString & "   " & precentageAllowedBUY.ToString)
 
-				WriteLog(String.Concat(vbTab, "| ", coin.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "Umbral: ", precentageAllowedBUY.ToString, vbTab, " OP:", vbTab, oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "NP:", vbTab, newPrice.ToString).Replace(",", "."))
+	'			WriteLog(String.Concat(vbTab, "| ", coin.Symbol, vbTab, vbTab, "VAR: ", If(result.ToString("0.000").Contains("-"), result.ToString("0.000"), result.ToString(" 0.000")), "%", vbTab, "Umbral: ", precentageAllowedBUY.ToString, vbTab, " OP:", vbTab, oldPrice.ToString, If(oldPrice.ToString.Length <= 3, vbTab, ""), If(oldPrice.ToString.Length >= 8, "", vbTab), vbTab, "NP:", vbTab, newPrice.ToString).Replace(",", "."))
 
-				'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MENOR QUE EL CONFIGURADO (precentageAllowedBUY), SE COMPRA (INVERSA EN VENTA)
-				If result <= precentageAllowedBUY Then
-					coin.Var = result
-					'readyToBuy.Add(New SIMBOLO(coin.Symbol, coin.MarketPrice))
-					readyToBuy.Add(coin)
-				End If
-			Next
+	'			'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MENOR QUE EL CONFIGURADO (precentageAllowedBUY), SE COMPRA (INVERSA EN VENTA)
+	'			If result <= precentageAllowedBUY Then
+	'				coin.Var = result
+	'				'readyToBuy.Add(New SIMBOLO(coin.Symbol, coin.MarketPrice))
+	'				readyToBuy.Add(coin)
+	'			End If
+	'		Next
 
-			Return readyToBuy
-		Catch ex As Exception
-			WriteLog(ex.Message & "/ ERR: WeHaveBuys()")
-			MsgBox(ex.Message)
-		End Try
-		Return Nothing
-	End Function
+	'		Return readyToBuy
+	'	Catch ex As Exception
+	'		WriteLog(ex.Message & "/ ERR: WeHaveBuys()")
+	'		MsgBox(ex.Message)
+	'	End Try
+	'	Return Nothing
+	'End Function
 
 	'Public Function WeHaveBuysV2() As List(Of SIMBOLO)
 	'	Try

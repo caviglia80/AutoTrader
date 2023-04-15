@@ -1,4 +1,5 @@
-﻿Imports Newtonsoft.Json
+﻿Imports System.Net
+Imports Newtonsoft.Json
 
 
 
@@ -218,13 +219,34 @@ Module WebMethods
 			json.Load(JsonResponse)
 			Return CDbl(json.StringOf("priceChangePercent").Replace(".", ","))
 		Catch ex As Exception
-			WriteLog(ex.Message & "/ ERR: WebGet_Maintenance()")
+			WriteLog(ex.Message & "/ ERR: WebGet_Cambio24hsBTC()")
 			MsgBox(ex.Message)
 		End Try
 		Return True
 	End Function
 
+	Public Function Tendencia(symbol As String, Optional interval As String = "1d", Optional limit As Integer = 24) As String
+		Try
+			Dim url As String = "https://api.binance.com/api/v3/klines?symbol=" & symbol & "&interval=" & interval & "&limit=" & limit
+			Dim wc As New WebClient()
+			Dim json As String = wc.DownloadString(url)
 
+			Dim data As List(Of Object()) = JsonConvert.DeserializeObject(Of List(Of Object()))(json)
+
+			Dim closingPrices As List(Of Decimal) = data.Select(Function(x) Convert.ToDecimal(x(4))).ToList()
+			Dim lastPrice As Decimal = closingPrices.Last()
+			Dim movingAverage As Decimal = closingPrices.Average()
+
+			If lastPrice > movingAverage Then
+				Return String.Concat("ALZA,", interval, ",", limit.ToString())
+			Else
+				Return String.Concat("BAJA,", interval, ",", limit.ToString())
+			End If
+		Catch ex As Exception
+			MsgBox(ex.Message)
+			Return "Error en Tendencia"
+		End Try
+	End Function
 
 
 

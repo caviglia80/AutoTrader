@@ -20,7 +20,7 @@ Public Class Form1
 
 
 
-		'MsgBox(TCoins_getInversion("SOLUSDT"))
+		MsgBox(Tendencia("BTCUSDT", "1h"))
 
 
 
@@ -39,7 +39,8 @@ Public Class Form1
 						LabelBTC()
 						SENSIBILIDAD_COMPRA = i
 						Await Task.Run(Sub()
-										   Trading_v1()
+										   'Trading_v1()
+										   Trading_Intelligent()
 										   System.Threading.Thread.Sleep(1000)
 									   End Sub)
 					Next
@@ -84,7 +85,7 @@ Public Class Form1
 	'	End Try
 	'End Sub
 
-	Private Sub Trading()
+	Private Sub Trading_Intelligent()
 		Try
 			Dim Buylist As List(Of SIMBOLO) = WeHaveBuysV2_Intelligent()
 			If Buylist.Count > 0 Then
