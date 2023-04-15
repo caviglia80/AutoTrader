@@ -228,6 +228,14 @@ Module DB
 					cmd.ExecuteNonQuery()
 				End Using
 			End Using
+
+
+
+			Tendencia("BTCUSDT", "1h")
+
+
+
+
 			Return True
 		Catch ex As Exception
 			WriteLog(ex.Message & "/ ERR: TBuysTCoins_NewBuy()")

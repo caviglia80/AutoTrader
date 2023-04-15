@@ -39,8 +39,8 @@ Public Class Form1
 						LabelBTC()
 						SENSIBILIDAD_COMPRA = i
 						Await Task.Run(Sub()
-										   'Trading_v1()
-										   Trading_Intelligent()
+										   Trading_v1()
+										   'Trading_Intelligent()
 										   System.Threading.Thread.Sleep(1000)
 									   End Sub)
 					Next
@@ -62,28 +62,28 @@ Public Class Form1
 		End Try
 	End Sub
 
-	'Private Sub Trading_v1()
-	'	Try
-	'		Dim Buylist As List(Of SIMBOLO) = WeHaveBuysV2()
-	'		If Buylist.Count > 0 Then
-	'			If Not WebPost_TryBUY(Buylist) Then
-	'				WriteLog("Fatal error en Compra.")
-	'			End If
-	'		End If
+	Private Sub Trading_v1()
+		Try
+			Dim Buylist As List(Of SIMBOLO) = WeHaveBuysV2()
+			If Buylist.Count > 0 Then
+				If Not WebPost_TryBUY(Buylist) Then
+					WriteLog("Fatal error en Compra.")
+				End If
+			End If
 
-	'		WriteLog(String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%"))
+			WriteLog(String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%"))
 
-	'		Dim SellList As List(Of SIMBOLO) = WeHaveSells()
-	'		If SellList.Count > 0 Then
-	'			WriteLog(String.Concat(vbTab, "|", vbTab, "A VENDER: ", SellList.Count.ToString))
-	'			If Not WebPost_TrySELL(SellList) Then
-	'				WriteLog("Fatal error en venta.")
-	'			End If
-	'		End If
-	'	Catch ex As Exception
-	'		MsgBox(ex.Message)
-	'	End Try
-	'End Sub
+			Dim SellList As List(Of SIMBOLO) = WeHaveSells()
+			If SellList.Count > 0 Then
+				WriteLog(String.Concat(vbTab, "|", vbTab, "A VENDER: ", SellList.Count.ToString))
+				If Not WebPost_TrySELL(SellList) Then
+					WriteLog("Fatal error en venta.")
+				End If
+			End If
+		Catch ex As Exception
+			MsgBox(ex.Message)
+		End Try
+	End Sub
 
 	Private Sub Trading_Intelligent()
 		Try
