@@ -206,7 +206,7 @@ Module DB
 				Dim comment As String = String.Concat("BUY-> BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, Sensibilidad: ", SENSIBILIDAD_COMPRA.ToString(), "%, ", Comments)
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice, Comments) VALUES (""", Coin.Symbol, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", Coin.lastPrice.ToString().Replace(",", "."), """,""", comment, """);")}
+					.CommandText = String.Concat("INSERT INTO tBuys (Coin, Date, USDT, Quantity, MarketPrice, Comments, Tendencia) VALUES (""", Coin.Symbol, """,""", _Date, """,""", USDT.Replace(",", "."), """,""", Quantity, """,""", Coin.lastPrice.ToString().Replace(",", "."), """,""", comment, """,""", Tendencia("BTCUSDT", "1h", 24), """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
@@ -228,14 +228,6 @@ Module DB
 					cmd.ExecuteNonQuery()
 				End Using
 			End Using
-
-
-
-			Tendencia("BTCUSDT", "1h")
-
-
-
-
 			Return True
 		Catch ex As Exception
 			WriteLog(ex.Message & "/ ERR: TBuysTCoins_NewBuy()")
@@ -286,7 +278,7 @@ Module DB
 				Dim Comments As String = String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%, ")
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, SL, Comments) VALUES (""", Coin.Symbol, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", If(Coin.SL, "SI", "NO"), """,""", Comments, """);")}
+					.CommandText = String.Concat("INSERT INTO tSells (Coin, Date, ProfitUSDTbr, Quantity, ProfitUSDT, SL, Comments, Tendencia) VALUES (""", Coin.Symbol, """,""", _Date, """,""", CStr(ProfitUSDTbr).Replace(",", "."), """,""", CStr(Quantity).Replace(",", "."), """,""", CStr(ProfitUSDT).Replace(",", "."), """,""", If(Coin.SL, "SI", "NO"), """,""", Comments, """,""", Tendencia("BTCUSDT", "1h", 24), """);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
