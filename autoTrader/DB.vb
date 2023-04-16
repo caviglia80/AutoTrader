@@ -559,7 +559,7 @@ Module DB
 				SQLiteConnection.Open()
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tBuysTemp (Coin, Date, Sondeadas) VALUES ('", Coin.Symbol, "','", Now, "','1') ON CONFLICT(Coin) DO UPDATE SET Date='", Now, "', Sondeadas=Sondeadas+1;")}
+					.CommandText = String.Concat("INSERT INTO tBuysTemp (Coin, Date, Sondeadas, Prices) VALUES ('", Coin.Symbol, "','", Now, "','1','", Coin.lastPrice.ToString(), "') ON CONFLICT(Coin) DO UPDATE SET Date='", Now, "', Sondeadas=Sondeadas+1,Prices=Prices||', ", Coin.lastPrice.ToString(), "';")}
 					cmd.ExecuteNonQuery()
 				End Using
 			End Using
