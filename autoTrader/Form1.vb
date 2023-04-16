@@ -100,7 +100,7 @@ Public Class Form1
 				For Each Coin As KeyValuePair(Of String, String) In TBuysTemp_GetDate()
 					Dim UltimaFecha As Date = Date.Parse(Coin.Value)
 					Dim duracion As TimeSpan = Now.Subtract(UltimaFecha)
-					If duracion.TotalMinutes >= 5 Then TBuysTemp_Borrar(Coin.Key)
+					If duracion.TotalMinutes >= 5 Then TBuysTemp_Reset(Coin.Key)
 				Next
 			End If
 

@@ -651,7 +651,7 @@ Module DB
 	'	Return Nothing
 	'End Function
 
-	'BORRAR tBuysTemp ID
+	'BORRAR tBuysTemp
 	Public Sub TBuysTemp_Borrar(symbol As String)
 		Try
 			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
@@ -668,7 +668,22 @@ Module DB
 		End Try
 	End Sub
 
-
+	'RESET tBuysTemp
+	Public Sub TBuysTemp_Reset(symbol As String)
+		Try
+			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
+				SQLiteConnection.Open()
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("UPDATE tBuysTemp SET Sondeadas=0 WHERE Coin='", symbol, "';")}
+					cmd.ExecuteNonQuery()
+				End Using
+			End Using
+		Catch ex As Exception
+			WriteLog(ex.Message & "/ ERR: TBuysTemp_Reset()")
+			MsgBox(ex.Message)
+		End Try
+	End Sub
 
 
 

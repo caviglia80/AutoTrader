@@ -115,7 +115,7 @@ Module WebMethods
 				Dim comments As String = String.Concat("Umbral: ", TCoins_percOperation(Coin.Symbol, "BUY").ToString("0.00"), ", Current: ", result.ToString("0.0000"))
 
 				TBuysTCoins_NewBuy(Coin, Now, USDTtoBUY, Qty, comments)
-				TBuysTemp_Borrar(Coin.Symbol)
+				TBuysTemp_Reset(Coin.Symbol)
 			Next
 
 			Return True
