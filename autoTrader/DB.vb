@@ -553,14 +553,14 @@ Module DB
 	End Function
 
 	'ACTUALIZO tBuysTemp
-	Public Function TBuysTemp_NewLog(Coin As SIMBOLO) As Boolean
+	Public Function TBuysTemp_New(Coin As SIMBOLO) As Boolean
 		Try
 			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
 				SQLiteConnection.Open()
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("INSERT INTO tBuysTemp (Coin, MarketPrice, Date) VALUES (""", Coin.Symbol, """,""", Coin.MarketPrice.ToString().Replace(",", "."), """,""", Now, """);")}
+					.CommandText = String.Concat("INSERT INTO tBuysTemp (Coin, Date, Sondeadas) VALUES (""", Coin.Symbol, """,""", Now, """,""", "1", """ ON DUPLICATE KEY UPDATE Coin=""", Coin.Symbol, """, Date=""", Now, """, Sondeadas=Sondeadas+1);")}
 					cmd.ExecuteNonQuery()
 				End Using
 
@@ -578,7 +578,7 @@ Module DB
 			End Using
 			Return True
 		Catch ex As Exception
-			WriteLog(ex.Message & "/ ERR: TBuysTemp_NewLog()")
+			WriteLog(ex.Message & "/ ERR: TBuysTemp_New()")
 			MsgBox(ex.Message)
 		End Try
 		Return False
