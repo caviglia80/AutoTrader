@@ -94,16 +94,6 @@ Module WebMethods
 		Try
 			For Each Coin In coinList
 
-				If Not TCoins_isEnabled(Coin.Symbol, "BUY") Then
-					WriteLog(String.Concat("ADVERTENCIA: DESHABILITADA para la compra ", Coin.Symbol))
-					Continue For              'SI NO ESTA HABILITADA PARA COMPRAR, LA SALTEA
-				End If
-
-				If Not TCoinsTBuys_isAvailableToBuy(Coin.Symbol) Then
-					WriteLog(String.Concat("ADVERTENCIA: MAXIMO DE COMPRAS ALCANZADO ", Coin.Symbol))
-					Continue For         'SI LLEGO AL MAXIMO DE COMPRAS SIMULTANEAS, LA SALTEO
-				End If
-
 				Dim QuantityToBuy As String = calculateQuantityToBuy(Coin.Symbol, Coin.lastPrice, TCoins_getInversion(Coin.Symbol))
 				Dim respPost As String = ""
 				If Not debugMode Then respPost = _POST("/api/v3/order", Coin.Symbol, "BUY", QuantityToBuy)
@@ -125,7 +115,7 @@ Module WebMethods
 				Dim comments As String = String.Concat("Umbral: ", TCoins_percOperation(Coin.Symbol, "BUY").ToString("0.00"), ", Current: ", result.ToString("0.0000"))
 
 				TBuysTCoins_NewBuy(Coin, Now, USDTtoBUY, Qty, comments)
-				'If Coin.ID.Length > 0 Then TBuysTemp_BorrarID(Coin.ID)
+				TBuysTemp_Borrar(Coin.Symbol)
 			Next
 
 			Return True

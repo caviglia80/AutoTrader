@@ -20,10 +20,6 @@ Public Class Form1
 
 
 
-		TBuysTemp_New(New SIMBOLO("", "BTCUSDT", ""))
-
-
-
 	End Sub
 
 	Private Async Sub tBatch_Tick(sender As Object, e As EventArgs) Handles tBatch.Tick
@@ -87,21 +83,15 @@ Public Class Form1
 
 	Private Sub Trading_Intelligent()
 		Try
-			Dim Buylist As List(Of SIMBOLO) = WeHaveBuysV2_Intelligent()
+			Dim Buylist As List(Of SIMBOLO) = WeHaveBuysV2()
+			Dim Buylist2 As New List(Of SIMBOLO)
 			If Buylist.Count > 0 Then
-
-
 				For Each Coin In Buylist
-
+					TBuysTemp_New(Coin)
+					If TBuysTemp_GetCoins().Contains(Coin.Symbol) Then Buylist2.Add(Coin)
 				Next
 
-
-
-
-
-
-
-				If Not WebPost_TryBUY(Buylist) Then
+				If Not WebPost_TryBUY(Buylist2) Then
 					WriteLog("Fatal error en Compra.")
 				End If
 			End If

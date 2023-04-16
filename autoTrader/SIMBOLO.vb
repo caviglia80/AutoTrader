@@ -221,6 +221,10 @@ Public Class SIMBOLO
 		_marketPrice = CDbl(MarketPrice)
 	End Sub
 
+	Public Sub New(Symbol As String)
+		_symbol = Symbol
+	End Sub
+
 End Class
 
 

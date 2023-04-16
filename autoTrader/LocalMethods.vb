@@ -56,59 +56,59 @@ Module LocalMethods
 		Return Nothing
 	End Function
 
-	Public Function WeHaveBuysV2_Intelligent() As List(Of SIMBOLO)
-		Try
-			Dim readyToBuy As New List(Of SIMBOLO)
+	'Public Function WeHaveBuysV2_Intelligent() As List(Of SIMBOLO)
+	'	Try
+	'		Dim readyToBuy As New List(Of SIMBOLO)
 
-			For Each coin In WEB_GetPriceList24h(TCoins_getListOfCoins())
+	'		For Each coin In WEB_GetPriceList24h(TCoins_getListOfCoins())
 
-				If Not TCoins_isEnabled(coin.Symbol, "BUY") Then
-					WriteLog(String.Concat("ADVERTENCIA: DESHABILITADA para la compra ", coin.Symbol))
-					Continue For              'SI NO ESTA HABILITADA PARA COMPRAR, LA SALTEA
-				End If
+	'			If Not TCoins_isEnabled(coin.Symbol, "BUY") Then
+	'				WriteLog(String.Concat("ADVERTENCIA: DESHABILITADA para la compra ", coin.Symbol))
+	'				Continue For              'SI NO ESTA HABILITADA PARA COMPRAR, LA SALTEA
+	'			End If
 
-				If Not TCoinsTBuys_isAvailableToBuy(coin.Symbol) Then
-					WriteLog(String.Concat("ADVERTENCIA: MAXIMO DE COMPRAS ALCANZADO ", coin.Symbol))
-					Continue For         'SI LLEGO AL MAXIMO DE COMPRAS SIMULTANEAS, LA SALTEO
-				End If
+	'			If Not TCoinsTBuys_isAvailableToBuy(coin.Symbol) Then
+	'				WriteLog(String.Concat("ADVERTENCIA: MAXIMO DE COMPRAS ALCANZADO ", coin.Symbol))
+	'				Continue For         'SI LLEGO AL MAXIMO DE COMPRAS SIMULTANEAS, LA SALTEO
+	'			End If
 
-				Dim oldPrice As Double = TCoins_getLastPriceOperations(coin.Symbol)  'OBTENGO COIN LOCAL, ultimo precio registrado, YA SEA ULTIMA COMPRA O ULTIMA VENTA
-				Dim precentageAllowedBUY As Double = TCoins_percOperation(coin.Symbol, "BUY")   'OBTENGO EL PORCENTAGE CONFIGURADO DE LA COIN
+	'			Dim oldPrice As Double = TCoins_getLastPriceOperations(coin.Symbol)  'OBTENGO COIN LOCAL, ultimo precio registrado, YA SEA ULTIMA COMPRA O ULTIMA VENTA
+	'			Dim precentageAllowedBUY As Double = TCoins_percOperation(coin.Symbol, "BUY")   'OBTENGO EL PORCENTAGE CONFIGURADO DE LA COIN
 
-				Dim DistanciaEntreMinYPromedio As Double = (coin.highPrice - coin.lowPrice) / 2
-				'Dim PrecioPromedio As Double = coin.lowPrice + DistanciaEntreMinYPromedio                   ' Precio medio entre min y max
-				'Dim DistanciaAMin As Double = Math.Abs(coin.lastPrice - coin.lowPrice)                      ' Distancia entre CurrentPrice y LowPrice
-				'Dim DistanciaAPromedio As Double = Math.Abs(coin.lastPrice - PrecioPromedio)                ' Distancia entre CurrentPrice y el PrecioPromedio
-				Dim UmbralPermitido As Double = (SENSIBILIDAD_COMPRA * DistanciaEntreMinYPromedio) / 100    ' Edito el % y me devuelve el equivalente
-				'Dim PorcentajeActual As Double = (coin.lastPrice * 100) / (coin.lowPrice + UmbralPermitido)
+	'			Dim DistanciaEntreMinYPromedio As Double = (coin.highPrice - coin.lowPrice) / 2
+	'			'Dim PrecioPromedio As Double = coin.lowPrice + DistanciaEntreMinYPromedio                   ' Precio medio entre min y max
+	'			'Dim DistanciaAMin As Double = Math.Abs(coin.lastPrice - coin.lowPrice)                      ' Distancia entre CurrentPrice y LowPrice
+	'			'Dim DistanciaAPromedio As Double = Math.Abs(coin.lastPrice - PrecioPromedio)                ' Distancia entre CurrentPrice y el PrecioPromedio
+	'			Dim UmbralPermitido As Double = (SENSIBILIDAD_COMPRA * DistanciaEntreMinYPromedio) / 100    ' Edito el % y me devuelve el equivalente
+	'			'Dim PorcentajeActual As Double = (coin.lastPrice * 100) / (coin.lowPrice + UmbralPermitido)
 
 
-				'SI EL PRECIO ACTUAL ES MAS CERCANO AL LOWPRICE QUE DEL PROMEDIO, COMPRO
-				'If DistanciaAMin * SENSIBILIDAD_COMPRA < DistanciaAPromedio Then
-				If coin.lastPrice <= (coin.lowPrice + UmbralPermitido) Then
+	'			'SI EL PRECIO ACTUAL ES MAS CERCANO AL LOWPRICE QUE DEL PROMEDIO, COMPRO
+	'			'If DistanciaAMin * SENSIBILIDAD_COMPRA < DistanciaAPromedio Then
+	'			If coin.lastPrice <= (coin.lowPrice + UmbralPermitido) Then
 
-					Dim result As Double = ((coin.lastPrice * 100) / oldPrice) - 100 'REGLA DE 3 SIMPLES PARA SABER EL PORCENTAJE DE CAMBIO
-					'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MENOR QUE EL CONFIGURADO (precentageAllowedBUY), SE COMPRA (INVERSA EN VENTA)
-					If result <= precentageAllowedBUY Then
-						readyToBuy.Add(coin)
-						WriteLog(String.Concat(vbTab, "|** ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", result.ToString("0.0000"), vbTab, "Umbral: ", precentageAllowedBUY.ToString("0.00"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
-					Else
-						WriteLog(String.Concat(vbTab, "|*  ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", result.ToString("0.0000"), vbTab, "Umbral: ", precentageAllowedBUY.ToString("0.00"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
-						'WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "TFalta: ", (coin.lastPrice - (coin.lowPrice + UmbralPermitido)).ToString("0.0000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
-					End If
-				Else
-					WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "Sensibilidad: ", SENSIBILIDAD_COMPRA, "%  Falta: ", Math.Max(coin.lastPrice - (coin.lowPrice + UmbralPermitido), 0).ToString("0.00000000"), vbTab, " OP: ", oldPrice.ToString("0.00000000"), vbTab, " NP: ", coin.lastPrice.ToString("0.00000000")))
-					'WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "TFalta: ", (coin.lastPrice - (coin.lowPrice + UmbralPermitido)).ToString("0.0000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
-				End If
-			Next
+	'				Dim result As Double = ((coin.lastPrice * 100) / oldPrice) - 100 'REGLA DE 3 SIMPLES PARA SABER EL PORCENTAJE DE CAMBIO
+	'				'CONSULTO SI EL PORCENTAJE CALCULADO (result) ES MENOR QUE EL CONFIGURADO (precentageAllowedBUY), SE COMPRA (INVERSA EN VENTA)
+	'				If result <= precentageAllowedBUY Then
+	'					readyToBuy.Add(coin)
+	'					WriteLog(String.Concat(vbTab, "|** ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", result.ToString("0.0000"), vbTab, "Umbral: ", precentageAllowedBUY.ToString("0.00"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
+	'				Else
+	'					WriteLog(String.Concat(vbTab, "|*  ", coin.Symbol, "  ", vbTab, vbTab, "Current: ", result.ToString("0.0000"), vbTab, "Umbral: ", precentageAllowedBUY.ToString("0.00"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
+	'					'WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "TFalta: ", (coin.lastPrice - (coin.lowPrice + UmbralPermitido)).ToString("0.0000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
+	'				End If
+	'			Else
+	'				WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "Sensibilidad: ", SENSIBILIDAD_COMPRA, "%  Falta: ", Math.Max(coin.lastPrice - (coin.lowPrice + UmbralPermitido), 0).ToString("0.00000000"), vbTab, " OP: ", oldPrice.ToString("0.00000000"), vbTab, " NP: ", coin.lastPrice.ToString("0.00000000")))
+	'				'WriteLog(String.Concat(vbTab, "|   ", coin.Symbol, "  ", vbTab, vbTab, "TFalta: ", (coin.lastPrice - (coin.lowPrice + UmbralPermitido)).ToString("0.0000"), vbTab, " OP: ", oldPrice.ToString("0.0000"), vbTab, " NP: ", coin.lastPrice.ToString("0.0000")))
+	'			End If
+	'		Next
 
-			Return readyToBuy
-		Catch ex As Exception
-			WriteLog(ex.Message & "/ ERR: WeHaveBuysV2()")
-			MsgBox(ex.Message)
-		End Try
-		Return Nothing
-	End Function
+	'		Return readyToBuy
+	'	Catch ex As Exception
+	'		WriteLog(ex.Message & "/ ERR: WeHaveBuysV2()")
+	'		MsgBox(ex.Message)
+	'	End Try
+	'	Return Nothing
+	'End Function
 
 	Public Function QuantityNormalized(coin As String, Qty As String) As String
 		Try
