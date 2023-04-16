@@ -20,7 +20,7 @@ Public Class Form1
 
 
 
-		MsgBox(Tendencia("BTCUSDT", "1h"))
+		TBuysTemp_New(New SIMBOLO("", "BTCUSDT", ""))
 
 
 
@@ -39,8 +39,8 @@ Public Class Form1
 						LabelBTC()
 						SENSIBILIDAD_COMPRA = i
 						Await Task.Run(Sub()
-										   Trading_v1()
-										   'Trading_Intelligent()
+										   'Trading_v1()
+										   Trading_Intelligent()
 										   System.Threading.Thread.Sleep(1000)
 									   End Sub)
 					Next
@@ -91,7 +91,9 @@ Public Class Form1
 			If Buylist.Count > 0 Then
 
 
+				For Each Coin In Buylist
 
+				Next
 
 
 
