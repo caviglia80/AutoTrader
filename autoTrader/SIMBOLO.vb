@@ -211,14 +211,14 @@ Public Class SIMBOLO
 	Public Sub New(ID As String, Symbol As String, MarketPrice As String, qty As String)
 		_id = ID
 		_symbol = Symbol
-		_marketPrice = MarketPrice
-		_quantity = qty
+		_marketPrice = CDbl(MarketPrice)
+		_quantity = CDbl(qty)
 	End Sub
 
 	Public Sub New(ID As String, Symbol As String, MarketPrice As String)
 		_id = ID
 		_symbol = Symbol
-		_marketPrice = MarketPrice
+		_marketPrice = CDbl(MarketPrice)
 	End Sub
 
 End Class
