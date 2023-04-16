@@ -580,7 +580,7 @@ Module DB
 
 				Using cmd As New SQLiteCommand With {
 					.Connection = SQLiteConnection,
-					.CommandText = String.Concat("SELECT Coin FROM tBuysTemp WHERE Sondeadas >= 1;")}
+					.CommandText = String.Concat("SELECT Coin FROM tBuysTemp WHERE Sondeadas >= 2;")}
 					Dim SQLiteReader As SQLiteDataReader = cmd.ExecuteReader()
 
 					While SQLiteReader.Read()
