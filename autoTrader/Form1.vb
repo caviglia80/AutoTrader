@@ -87,10 +87,12 @@ Public Class Form1
 			Dim Buylist As List(Of SIMBOLO) = WeHaveBuysV2()
 			Dim Buylist2 As New List(Of SIMBOLO)
 			If Buylist.Count > 0 Then
+
 				For Each Coin In Buylist
 					TBuysTemp_New(Coin)
 					If TBuysTemp_GetNameCoins().Contains(Coin.Symbol) Then Buylist2.Add(Coin)
 				Next
+
 				If Not WebPost_TryBUY(Buylist2) Then
 					WriteLog("Fatal error en Compra.")
 				End If
