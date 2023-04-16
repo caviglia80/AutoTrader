@@ -112,58 +112,28 @@ Module LocalMethods
 
 	Public Function QuantityNormalized(coin As String, Qty As String) As String
 		Try
-			'WriteLog("0")
-
 			Qty = Qty.Replace(",", ".")
 			Dim json As New Chilkat.JsonObject()
-
 			Dim JsonResponse As String = _GET(String.Concat("/api/v3/exchangeInfo?symbol=", coin))
 			If IsError(JsonResponse) Then Return Nothing
 			json.Load(JsonResponse)
-
 			Dim minQty As String = json.StringOf("symbols[0].filters[1].minQty")
 
-			'WriteLog(Qty)
-
 			Try
-				'WriteLog("1")
-
 				If CInt(minQty.Split("."c)(0).Trim) = 1 Then    'TIENE 1 DELANTE DE LA COMA
 					Try
 						Qty = Qty.Split("."c)(0)
-						'WriteLog("1.2")
-
 						Return Qty.Trim
 					Catch ex As Exception
 						WriteLog(ex.Message & "/ ERR: QuantityNormalized() 4")
 						WriteLog(JsonResponse)
 						MsgBox(ex.Message)
 					End Try
-
 				Else                                            'TIENE 1 DETRAS DE LA COMA
-
 					Try
 						Dim indexDelUno As Integer = minQty.Split("."c)(1).Trim().IndexOf("1")
-						'WriteLog("indexDelUno = " + indexDelUno.ToString)
-						'WriteLog("2")
-
-						'WriteLog(Qty)
-
-						'WriteLog("3")
-
 						Dim onlyDecimals_Normalized As String = Qty.Split("."c)(1).Substring(0, indexDelUno + 1)
-
-						'WriteLog("4")
-
 						Qty = String.Concat(Qty.Split("."c)(0), ".", onlyDecimals_Normalized)
-
-						'WriteLog("5")
-
-						'If coin.Equals("TRXUSDT") Then
-						'	WriteLog("TESTTTTTTTTTTT")
-						'	WriteLog(JsonResponse)
-						'End If
-
 						Return Qty.Trim
 					Catch ex As Exception
 						WriteLog(ex.Message & "/ ERR: QuantityNormalized() 3")
@@ -256,7 +226,6 @@ Module LocalMethods
 					WriteLog(strResponse)
 				ElseIf strResponse.Contains("SIN_RED") Then
 					WriteLog("ERR(RESPONSE): NO HAY RED, O RED INESTABLE")
-					'System.Threading.Thread.Sleep(300000)
 				Else
 					WriteLog(String.Concat("ERROR DESCONOCIDO: ", strResponse))
 				End If

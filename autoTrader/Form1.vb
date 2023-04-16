@@ -19,6 +19,8 @@ Public Class Form1
 	Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
 
+
+
 	End Sub
 
 	Private Async Sub tBatch_Tick(sender As Object, e As EventArgs) Handles tBatch.Tick
@@ -87,12 +89,17 @@ Public Class Form1
 			If Buylist.Count > 0 Then
 				For Each Coin In Buylist
 					TBuysTemp_New(Coin)
-					If TBuysTemp_GetCoins().Contains(Coin.Symbol) Then Buylist2.Add(Coin)
+					If TBuysTemp_GetNameCoins().Contains(Coin.Symbol) Then Buylist2.Add(Coin)
 				Next
-
 				If Not WebPost_TryBUY(Buylist2) Then
 					WriteLog("Fatal error en Compra.")
 				End If
+
+				For Each Coin As KeyValuePair(Of String, String) In TBuysTemp_GetDate()
+					Dim UltimaFecha As Date = Date.Parse(Coin.Value)
+					Dim duracion As TimeSpan = Now.Subtract(UltimaFecha)
+					If duracion.TotalMinutes >= 5 Then TBuysTemp_Borrar(Coin.Key)
+				Next
 			End If
 
 			WriteLog(String.Concat("BTC: ", CAMBIO24HS_BTC.ToString("0.00"), "%"))

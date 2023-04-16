@@ -1,5 +1,5 @@
 ﻿Imports System.Data.SQLite
-
+Imports System.Collections.Generic
 
 
 
@@ -572,7 +572,7 @@ Module DB
 	End Function
 
 	'LEER tBuysTemp
-	Public Function TBuysTemp_GetCoins() As List(Of String)
+	Public Function TBuysTemp_GetNameCoins() As List(Of String)
 		Try
 			Dim result As New List(Of String)
 			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
@@ -592,7 +592,33 @@ Module DB
 			End Using
 			Return result
 		Catch ex As Exception
-			WriteLog(ex.Message & "/ ERR: TBuysTemp_GetOldPrices()")
+			WriteLog(ex.Message & "/ ERR: TBuysTemp_GetNameCoins()")
+			MsgBox(ex.Message)
+		End Try
+		Return Nothing
+	End Function
+
+	Public Function TBuysTemp_GetDate() As Dictionary(Of String, String)
+		Try
+			Dim result As New Dictionary(Of String, String)
+			Using SQLiteConnection As New SQLiteConnection With {.ConnectionString = strConnection}
+				SQLiteConnection.Open()
+
+				Using cmd As New SQLiteCommand With {
+					.Connection = SQLiteConnection,
+					.CommandText = String.Concat("SELECT Coin, Date FROM tBuysTemp;")}
+					Dim SQLiteReader As SQLiteDataReader = cmd.ExecuteReader()
+
+					While SQLiteReader.Read()
+						result.Add(CStr(SQLiteReader(0)), CStr(SQLiteReader(1)))
+					End While
+
+					SQLiteReader.Close()
+				End Using
+			End Using
+			Return result
+		Catch ex As Exception
+			WriteLog(ex.Message & "/ ERR: TBuysTemp_GetDate()")
 			MsgBox(ex.Message)
 		End Try
 		Return Nothing
@@ -637,7 +663,7 @@ Module DB
 				End Using
 			End Using
 		Catch ex As Exception
-			WriteLog(ex.Message & "/ ERR: TBuysTemp_BorrarID()")
+			WriteLog(ex.Message & "/ ERR: TBuysTemp_Borrar()")
 			MsgBox(ex.Message)
 		End Try
 	End Sub
