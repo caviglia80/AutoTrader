@@ -20,7 +20,6 @@ Public Class Form1
 
 
 
-
 	End Sub
 
 	Private Async Sub tBatch_Tick(sender As Object, e As EventArgs) Handles tBatch.Tick
@@ -32,7 +31,7 @@ Public Class Form1
 			If Not WebGet_Maintenance() Then
 				If Not WEBGet_AccountAPITrading_isBlocked() Then
 
-					For i = 5 To 50 Step +5         '40
+					For i = 5 To 30 Step +5         '30
 						LabelBTC()
 						SENSIBILIDAD_COMPRA = i
 						Await Task.Run(Sub()
