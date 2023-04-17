@@ -29,6 +29,7 @@ Partial Class Form1
 		Me.lEstado = New System.Windows.Forms.Label()
 		Me.btnBorrarBD = New System.Windows.Forms.Button()
 		Me.btnActualizarBTC24 = New System.Windows.Forms.Button()
+		Me.TextBox1 = New System.Windows.Forms.TextBox()
 		Me.SuspendLayout()
 		'
 		'Button1
@@ -82,11 +83,20 @@ Partial Class Form1
 		Me.btnActualizarBTC24.Text = "Actualizar BTC 24"
 		Me.btnActualizarBTC24.UseVisualStyleBackColor = True
 		'
+		'TextBox1
+		'
+		Me.TextBox1.Location = New System.Drawing.Point(287, 13)
+		Me.TextBox1.Name = "TextBox1"
+		Me.TextBox1.Size = New System.Drawing.Size(65, 23)
+		Me.TextBox1.TabIndex = 5
+		Me.TextBox1.Text = "2"
+		'
 		'Form1
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.ClientSize = New System.Drawing.Size(364, 294)
+		Me.Controls.Add(Me.TextBox1)
 		Me.Controls.Add(Me.btnActualizarBTC24)
 		Me.Controls.Add(Me.btnBorrarBD)
 		Me.Controls.Add(Me.lEstado)
@@ -108,4 +118,5 @@ Partial Class Form1
 	Friend WithEvents lEstado As Label
 	Friend WithEvents btnBorrarBD As Button
 	Friend WithEvents btnActualizarBTC24 As Button
+	Friend WithEvents TextBox1 As TextBox
 End Class

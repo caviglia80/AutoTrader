@@ -1,4 +1,5 @@
 ﻿Imports System.Net
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports Newtonsoft.Json
 
 
@@ -241,7 +242,7 @@ Module WebMethods
 	Public Function Tendencia_v2_ToBuy(symbol As String) As Boolean
 		Try
 			Dim interval As String = "1s"
-			Dim limit As Integer = 4
+			Dim limit As Integer = CInt(Form1.TextBox1.Text)
 
 			Dim url As String = "https://api.binance.com/api/v3/klines?symbol=" & symbol & "&interval=" & interval & "&limit=" & limit
 			Dim wc As New WebClient()
