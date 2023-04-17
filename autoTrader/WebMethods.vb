@@ -238,7 +238,31 @@ Module WebMethods
 		End Try
 	End Function
 
+	Public Function Tendencia_v2_ToBuy(symbol As String) As Boolean
+		Try
+			Dim interval As String = "1s"
+			Dim limit As Integer = 4
 
+			Dim url As String = "https://api.binance.com/api/v3/klines?symbol=" & symbol & "&interval=" & interval & "&limit=" & limit
+			Dim wc As New WebClient()
+			Dim json As String = wc.DownloadString(url)
+
+			Dim data As List(Of Object()) = JsonConvert.DeserializeObject(Of List(Of Object()))(json)
+
+			Dim closingPrices As List(Of Decimal) = data.Select(Function(x) Convert.ToDecimal(x(4))).ToList()
+			Dim lastPrice As Decimal = closingPrices.Last()
+			Dim movingAverage As Decimal = closingPrices.Average()
+
+			If lastPrice > movingAverage Then
+				Return True
+			Else
+				Return False
+			End If
+		Catch ex As Exception
+			MsgBox(ex.Message)
+			Return "Error en Tendencia"
+		End Try
+	End Function
 
 
 
