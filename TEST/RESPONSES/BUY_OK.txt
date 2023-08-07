@@ -1,0 +1,22 @@
+{
+"symbol": "ETCUSDT",
+"orderId": 2851780567,
+"orderListId": -1,
+"clientOrderId": "AOYrm6XAql8tHGo4HTQk09",
+"transactTime": 1663631802214,
+"price": "0.00000000",
+"origQty": "0.98000000",
+"executedQty": "0.98000000",
+"cummulativeQuoteQty": "29.78220000",
+"status": "FILLED",
+"timeInForce": "GTC",
+"type": "MARKET",
+"side": "BUY",
+"fills": [{
+"price": "30.39000000",
+"qty": "0.98000000",
+"commission": "0.00008224",
+"commissionAsset": "BNB",
+"tradeId": 165159377
+}]
+}

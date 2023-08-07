@@ -1,0 +1,153 @@
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\autoTrader.exe
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\autoTrader.deps.json
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\autoTrader.runtimeconfig.json
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\autoTrader.runtimeconfig.dev.json
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\autoTrader.pdb
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.AssemblyReference.cache
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.Form1.resources
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.GenerateResource.cache
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.AssemblyInfoInputs.cache
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.AssemblyInfo.vb
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.CoreCompileInputs.cache
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\refint\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.pdb
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.genruntimeconfig.cache
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\ref\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\SharpDX.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.CopyComplete
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\Microsoft.Data.Sqlite.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\SQLitePCLRaw.core.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\System.Data.SQLite.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-x64\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\ChilkatDnCore.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\Microsoft.CodeAnalysis.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-arm\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-arm64\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-musl-x64\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-x64\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\osx-arm64\native\libchilkatDnCore-9_5_0.dylib
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\osx-x64\native\libchilkatDnCore-9_5_0.dylib
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x64\native\chilkatDnCore-9_5_0.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x86\native\chilkatDnCore-9_5_0.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\debian-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\fedora-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\opensuse-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\osx\native\libuv.dylib
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\rhel-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\win7-arm\native\libuv.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\win7-x64\native\libuv.dll
+C:\Users\cavig\OneDrive\Escritorio\autoTrader\bin\Debug\net5.0-windows\runtimes\win7-x86\native\libuv.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.exe
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.deps.json
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.runtimeconfig.json
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.runtimeconfig.dev.json
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.pdb
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\ChilkatDnCore.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.CodeAnalysis.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.Data.Sqlite.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\SharpDX.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\SQLitePCLRaw.core.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\System.Data.SQLite.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-arm\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-arm64\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-musl-x64\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-x64\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\osx-arm64\native\libchilkatDnCore-9_5_0.dylib
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\osx-x64\native\libchilkatDnCore-9_5_0.dylib
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x64\native\chilkatDnCore-9_5_0.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x86\native\chilkatDnCore-9_5_0.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\debian-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\fedora-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\opensuse-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\osx\native\libuv.dylib
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\rhel-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win7-arm\native\libuv.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win7-x64\native\libuv.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win7-x86\native\libuv.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-x64\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.AssemblyReference.cache
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.Form1.resources
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.GenerateResource.cache
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.AssemblyInfoInputs.cache
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.AssemblyInfo.vb
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.CoreCompileInputs.cache
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.CopyComplete
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\refint\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.pdb
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.genruntimeconfig.cache
+C:\Users\cavig\OneDrive\Escritorio\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\ref\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.exe
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.deps.json
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.runtimeconfig.json
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.runtimeconfig.dev.json
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\autoTrader.pdb
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\ChilkatDnCore.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.CodeAnalysis.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.Data.Sqlite.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\SharpDX.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\SQLitePCLRaw.core.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\System.Data.SQLite.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-arm\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-arm64\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-musl-x64\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-x64\native\libchilkatDnCore-9_5_0.so
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\osx-arm64\native\libchilkatDnCore-9_5_0.dylib
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\osx-x64\native\libchilkatDnCore-9_5_0.dylib
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x64\native\chilkatDnCore-9_5_0.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x86\native\chilkatDnCore-9_5_0.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\debian-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\fedora-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\opensuse-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\osx\native\libuv.dylib
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\rhel-x64\native\libuv.so
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win7-arm\native\libuv.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win7-x64\native\libuv.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win7-x86\native\libuv.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\linux-x64\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\bin\Debug\net5.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.AssemblyReference.cache
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.Form1.resources
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.GenerateResource.cache
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.AssemblyInfoInputs.cache
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.AssemblyInfo.vb
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.CoreCompileInputs.cache
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.vbproj.CopyComplete
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\refint\autoTrader.dll
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.pdb
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\autoTrader.genruntimeconfig.cache
+C:\Users\cavig\OneDrive\Escritorio\PIP\AUTO TRADER\autoTrader\obj\Debug\net5.0-windows\ref\autoTrader.dll

@@ -1,0 +1,96 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\cavig\\OneDrive\\Escritorio\\PIP\\BK -- AUTO TRADER\\autoTrader\\autoTrader.vbproj": {}
+  },
+  "projects": {
+    "C:\\Users\\cavig\\OneDrive\\Escritorio\\PIP\\BK -- AUTO TRADER\\autoTrader\\autoTrader.vbproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\cavig\\OneDrive\\Escritorio\\PIP\\BK -- AUTO TRADER\\autoTrader\\autoTrader.vbproj",
+        "projectName": "autoTrader",
+        "projectPath": "C:\\Users\\cavig\\OneDrive\\Escritorio\\PIP\\BK -- AUTO TRADER\\autoTrader\\autoTrader.vbproj",
+        "packagesPath": "C:\\Users\\cavig\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cavig\\OneDrive\\Escritorio\\PIP\\BK -- AUTO TRADER\\autoTrader\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\cavig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0-windows7.0": {
+            "targetAlias": "net5.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0-windows7.0": {
+          "targetAlias": "net5.0-windows",
+          "dependencies": {
+            "ChilkatDnCore": {
+              "target": "Package",
+              "version": "[9.5.0.91, )"
+            },
+            "Microsoft.Data.Sqlite.Core": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.23.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "SharpDX": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "System.Data.SQLite.Core": {
+              "target": "Package",
+              "version": "[1.0.116, )"
+            },
+            "System.Security.Cryptography.Algorithms": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
